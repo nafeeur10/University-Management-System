@@ -15,3 +15,4 @@ Route::post('/contact/form/submit', 'ContactFormController@sentMail')->name('sen
 Route::get('/sliders', 'HomeSliderController@getSliders');
 Route::get('/getnews', 'BreakingNewsController@newsList')->name('newslist');
 Route::get('/getwelcomeinfo', 'WelcomeMessageController@getwelcomeinfo')->name('welcomeinfo');
+Route::get('/getallfaculty', 'HomeFacultyController@getAllFaculty')->name('facultyinfo');

@@ -63,7 +63,7 @@
                         <tr data-entry-id="{{ $faculty->id }}">
                             <td></td>
                             <td>{{ $faculty->id }}</td>
-                            <td><img src="{{ asset('images/signature/'.$faculty->home_faculty_image) }}" style="width: 100px;"/></td>                            
+                            <td><img src="{{ asset('images/faculty/'.$faculty->home_faculty_image) }}" style="width: 100px;"/></td>                            
                             <td>{{ $faculty->home_faculty_title }}</td>
                             <td>{{ $faculty->home_faculty_title_arabic }}</td>
                             <td>{{ $faculty->home_faculty_description }}</td>

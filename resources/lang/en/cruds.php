@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'global' => [
+        'preview' => 'Preview'
+    ],
     'userManagement' => [
         'title'          => 'User management',
         'title_singular' => 'User management',
