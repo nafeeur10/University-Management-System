@@ -1,0 +1,28 @@
+.navbar_left-rtl {
+    padding-left: 0!important;
+    width: 80%!important;
+    padding-right: 160px !important;
+}
+
+.upper_navbar_left-rtl {
+    padding-left: 0!important; 
+    width: 75%!important;
+    padding-right: 160px!important;
+}
+
+.carousel-caption-rtl {
+    right: 0!important;
+    left: 35%!important;
+}
+
+.caption-button-rtl {
+    float: right;
+    margin-right: 5%;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav-rtl {
+        float: right!important;
+        margin: 0;
+    }
+}
