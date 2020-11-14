@@ -10,6 +10,29 @@ use Stevebauman\Location\Facades\Location;
 
 class VisitorsController extends Controller
 {
+
+    public function visitorInfo() {
+        $totalVisitors = DB::table('visitors_information')->distinct()->count('ip');
+        $visitors = DB::table('visitors_information')->get();
+
+        //dd($visitors);
+
+        $activeVisitorCounter = 0;
+        $currentTime = strtotime(date('Y-m-d H:i:s'));
+
+        foreach ($visitors as $v) {
+            $exitTime = strtotime($v->updated_at);
+            if(abs(($exitTime-$currentTime)/60) <=2) {
+                $activeVisitorCounter++;
+            }
+        }
+
+        return response()->json([
+            'totalVisitors' => $totalVisitors,
+            'activeVisitors' => $activeVisitorCounter
+        ]);
+    }
+
     public function index()
     {
         $totalVisitors = DB::table('visitors_information')->distinct()->count('ip');

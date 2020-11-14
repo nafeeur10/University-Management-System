@@ -6,6 +6,7 @@ Route::group(['prefix' => '/v1', 'namespace' => 'Api\V1', 'as' => 'api.'], funct
 
 });
 
+Route::get('/visitors', 'VisitorsController@visitorInfo');
 Route::get('/contact/basic', 'ContactController@contactus');
 Route::get('/contact/socialmedia', 'ContactController@getSocialMedias')->name('get-social-media');
 Route::get('/contact/form/department', 'ContactFormController@getDept')->name('get-contact-form-dept');

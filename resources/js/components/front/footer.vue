@@ -54,7 +54,7 @@
                       title="Facilities"
               >Careers</router-link>
             </li>
-            <li style="border: 1px solid;padding: 3px 12px;">Active Uesrs 500</li> 
+            <li style="border: 1px solid;padding: 3px 12px;">Active Uesrs {{ activeVisitors }}</li> 
           </ul>
         </div>
       </div>
@@ -90,7 +90,7 @@
                       title="News"
               >News</router-link>
             </li>
-            <li style="border: 1px solid;padding: 3px 12px;" >Total Uesrs 750</li> 
+            <li style="border: 1px solid;padding: 3px 12px;" >Total Uesrs {{ totalVisitors }}</li> 
           </ul>
         </div>
       </div>
@@ -143,5 +143,24 @@
 </style>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      totalVisitors: [],
+      activeVisitors: []
+    }
+  },
+  methods: {
+    getVisitors() {
+      this.$http.get('api/visitors')
+      .then( (res) => {
+        this.totalVisitors = res.data.totalVisitors
+        this.activeVisitors = res.data.activeVisitors
+      })
+    }
+  },
+  mounted() {
+    this.getVisitors();
+  }
+};
 </script>

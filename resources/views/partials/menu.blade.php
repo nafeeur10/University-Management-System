@@ -63,6 +63,12 @@
                 <span class="menu-title" data-i18n="Email">{{ trans('cruds.faculty.title') }}</span>
             </a>
         </li>
+        <li class="nav-item {{ request()->is('admin/events') || request()->is('admin/events/*') ? 'active' : '' }}">
+            <a href="{{ route("admin.events.index") }}">
+                <i class="feather icon-mail"></i>
+                <span class="menu-title" data-i18n="Email">{{ trans('cruds.events.title') }}</span>
+            </a>
+        </li>
         @endcan
 
         @can('editor_add_update')

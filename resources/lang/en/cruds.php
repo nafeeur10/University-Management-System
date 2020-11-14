@@ -213,5 +213,13 @@ return [
             'home_faculty_link' => 'Faculty Main Link',
             'home_faculty_link_helper' => '',
         ]
+    ],
+    'events' => [
+        'title' => 'Events',
+        'fields' => [
+            'id' => 'ID',
+            'event_title' => 'Title',
+            'event_title_helper' => ''
+        ]
     ]
 ];
