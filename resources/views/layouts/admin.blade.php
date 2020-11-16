@@ -324,7 +324,7 @@
     <!-- END: Page JS-->
 
     <script src="{{ asset('js/main.js') }}"></script>
-    <script src="{{ asset('js/image-uploader.min.js') }}"></script>
+    <script src="{{ asset('js/image-uploader.js') }}"></script>
 
 
     <script type="text/javascript">

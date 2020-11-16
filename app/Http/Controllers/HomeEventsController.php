@@ -72,15 +72,6 @@ class HomeEventsController extends Controller
 
     public function saveEventImagesInDB($id, $request, $storeOrUpdate)
     {
-        if($storeOrUpdate == 2) {
-            $imageList = DB::table('home_events_images')->where('event_id', $id)->get();
-            if(count($imageList) > 0) {
-                foreach($imageList as $image) {
-                    unlink(public_path('images/event/'.$image->event_image));
-                }
-            }
-            DB::table('home_events_images')->where('event_id', $id)->delete();
-        }
         if($files=$request->file('eventimages'))
         {
             foreach($files as $file)
@@ -164,7 +155,7 @@ class HomeEventsController extends Controller
             return redirect()->route('admin.events.index')->with('success', 'Event Updated successfully');
         }
         else {
-            return redirect()->back()->with('error', 'Please insert image');
+            return redirect()->back();
         }
     }
 
@@ -185,5 +176,14 @@ class HomeEventsController extends Controller
         $event->delete();
 
         return redirect()->back()->with('success', 'Deleted Successfully');
+    }
+
+    public function deleteEventImage($eventImageName)
+    {
+        DB::table('home_events_images')->where('event_image', $eventImageName)->delete();
+        unlink(public_path('images/event/'.$eventImageName));
+        return response()->json([
+            'success' => 'Delete Image Successfully'
+        ]);
     }
 }

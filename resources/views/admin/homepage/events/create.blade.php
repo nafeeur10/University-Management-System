@@ -179,16 +179,6 @@
 @parent
 <script type="text/javascript">
     let preloaded = [];
-    // $('form').on('submit', function (event) {
-
-    //     // Stop propagation
-    //     event.preventDefault();
-    //     event.stopPropagation();
-
-    //     let $form = $(this);
-    //     let $inputImages = $form.find('input[name^="images"]');
-    //     console.log($inputImages);
-    // });
 
     $('.input-images').imageUploader({
         preloaded: preloaded,
