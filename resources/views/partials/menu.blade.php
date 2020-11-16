@@ -66,7 +66,7 @@
         <li class="nav-item {{ request()->is('admin/events') || request()->is('admin/events/*') ? 'active' : '' }}">
             <a href="{{ route("admin.events.index") }}">
                 <i class="feather icon-mail"></i>
-                <span class="menu-title" data-i18n="Email">{{ trans('cruds.events.title') }}</span>
+                <span class="menu-title" data-i18n="Email">{{ trans('cruds.event.title') }}</span>
             </a>
         </li>
         @endcan

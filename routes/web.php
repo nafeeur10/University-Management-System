@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('welcomemessage', 'WelcomeMessageController');
     Route::resource('faculty', 'HomeFacultyController');
     Route::resource('events', 'HomeEventsController');
+    Route::get('/event/images/{id}', 'HomeEventsController@getImages');
     
     Route::get('social_contact', 'ContactController@social')->name('contact.social');
     Route::post('social_contact_store', 'ContactController@social_store')->name('contact.social-media.store');

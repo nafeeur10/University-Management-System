@@ -214,12 +214,25 @@ return [
             'home_faculty_link_helper' => '',
         ]
     ],
-    'events' => [
-        'title' => 'Events',
+    'event' => [
+        'title' => 'Event',
         'fields' => [
             'id' => 'ID',
+            'images' => 'Images',
             'event_title' => 'Title',
-            'event_title_helper' => ''
+            'event_title_helper' => '',
+            'event_title_arabic' => 'Title (Arabic)',
+            'event_title_arabic_helper' => '',
+            'event_description' => 'Description',
+            'event_description_helper' => '',
+            'event_description_arabic' => 'Description (Arabic)',
+            'event_description_arabic_helper' => '',
+            'event_date' => 'Event Date',
+            'event_date_helper' => '',
+            'event_start_time' => 'Event Start Time',
+            'event_start_time_helper' => '',
+            'event_end_time' => 'Event End Time',
+            'event_end_time_helper' => '',
         ]
     ]
 ];

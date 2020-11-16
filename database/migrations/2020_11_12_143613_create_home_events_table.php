@@ -19,8 +19,8 @@ class CreateHomeEventsTable extends Migration
             $table->string('event_title');
             $table->string('event_title_arabic');
 
-            $table->string('event_description');
-            $table->string('event_description_arabic');
+            $table->text('event_description');
+            $table->text('event_description_arabic');
 
             $table->date('event_date');
             $table->string('event_start_time');

@@ -40,8 +40,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/semi-dark-layout.css') }}">
 
     <!-- Dropzone CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/dropzone/dropzone.min.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/dropzone/basic.min.css') }}" />
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/image-uploader.min.css') }}">
 
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
@@ -318,12 +318,13 @@
     <script src="{{ asset('app-assets/vendors/js/extensions/toastr.min.js') }}"></script>
     <script src="{{ asset('app-assets/js/scripts/extensions/toastr.js') }}"></script>
     <script src="{{ asset('app-assets/js/scripts/datatables/datatable.js ') }}"></script>
-    <script src="{{ asset('app-assets/js/dropzone/dropzone.js ') }}"></script>
-    <script src="{{ asset('app-assets/js/scripts/extensions/sliderdropzone.js ') }}"></script>
+    <!-- <script src="{{ asset('app-assets/js/dropzone/dropzone.js ') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/extensions/sliderdropzone.js ') }}"></script> -->
     <!-- <script src="{{ asset('app-assets/js/scripts/pages/dashboard-analytics.js') }}"></script> -->
     <!-- END: Page JS-->
 
     <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/image-uploader.min.js') }}"></script>
 
 
     <script type="text/javascript">

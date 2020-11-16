@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.faculty.title') }}
+        {{ trans('global.show') }} {{ trans('cruds.event.title') }}
     </div>
 
     <div class="card-body">
@@ -12,62 +12,78 @@
                 <tbody>
                     <tr>
                         <th>
-                            {{ trans('cruds.faculty.fields.id') }}
+                            {{ trans('cruds.event.fields.id') }}
                         </th>
                         <td>
-                            {{ $faculty->id }}
+                            {{ $event->id }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.faculty.fields.home_faculty_image') }}
+                            {{ trans('cruds.event.fields.event_title') }}
                         </th>
                         <td>
-                            <img src="{{ asset('images/faculty/'.$faculty->home_faculty_image )}}" alt="Home Faculty Image" style="width: 100px">
+                            {{ $event->event_title }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.faculty.fields.home_faculty_title') }}
-                        </th>
-                        <td>
-                            {{ $faculty->home_faculty_title }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.faculty.fields.home_faculty_title_arabic') }}
+                            {{ trans('cruds.event.fields.event_title_arabic') }}
                         </th>
                         <td class="text-right" dir="rtl">
-                            {{ $faculty->home_faculty_title_arabic }}
+                            {{ $event->event_title_arabic }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.faculty.fields.home_faculty_description') }}
+                            {{ trans('cruds.event.fields.event_description') }}
                         </th>
                         <td>
-                            {{ $faculty->home_faculty_description }}
+                            {{ $event->event_description }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.faculty.fields.home_faculty_description_arabic') }}
+                            {{ trans('cruds.event.fields.event_description_arabic') }}
                         </th>
                         <td class="text-right" dir="rtl">
-                            {{ $faculty->home_faculty_description_arabic }}
+                            {{ $event->event_description_arabic }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.faculty.fields.home_faculty_link') }}
+                            {{ trans('cruds.event.fields.event_date') }}
                         </th>
                         <td>
-                            {{ $faculty->home_faculty_link }}
+                            {{ $event->event_date }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.event.fields.event_start_time') }}
+                        </th>
+                        <td>
+                            {{ $event->event_start_time }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.event.fields.event_end_time') }}
+                        </th>
+                        <td>
+                            {{ $event->event_end_time }}
                         </td>
                     </tr>
                 </tbody>
             </table>
+
+            <div class="my-2">
+                @foreach($eventimages as $key => $image)
+                    <img src="{{ asset('images/event/' . $image->event_image ) }}" 
+                        class="mr-2" 
+                        style="width: 250px; object-fit:cover;"/>
+                @endforeach
+            </div>
             <a style="margin-top:20px;" class="btn btn-primary" href="{{ url()->previous() }}">
                 {{ trans('global.back_to_list') }}
             </a>

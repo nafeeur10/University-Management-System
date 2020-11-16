@@ -5,18 +5,18 @@
         {!! \Session::get('success') !!}
     </div>
 @endif
-@can('editor_add_update')
+@can(['editor_add_update'])
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route("admin.events.create") }}">
-                {{ trans('global.add') }} {{ trans('cruds.events.title') }}
+                {{ trans('global.add') }} {{ trans('cruds.event.title') }}
             </a>
         </div>
     </div>
 @endcan
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.events.title') }} {{ trans('global.list') }}
+        {{ trans('cruds.event.title') }} {{ trans('global.list') }}
     </div>
 
     <div class="card-body">
@@ -29,32 +29,32 @@
                         </th>
 
                         <th>
-                            {{ trans('cruds.events.fields.id') }}
+                            {{ trans('cruds.event.fields.id') }}
                         </th>
 
                         <th>
-                            {{ trans('cruds.events.fields.event_title') }}
+                            {{ trans('cruds.event.fields.event_title') }}
                         </th>
 
                         <th>
-                            {{ trans('cruds.events.fields.event_title_arabic') }}
+                            {{ trans('cruds.event.fields.event_title_arabic') }}
                         </th>
                         <th>
-                            {{ trans('cruds.events.fields.event_description') }}
+                            {{ trans('cruds.event.fields.event_description') }}
                         </th>
                         <th>
-                            {{ trans('cruds.events.fields.event_description_arabic') }}
+                            {{ trans('cruds.event.fields.event_description_arabic') }}
                         </th>
                         <th>
-                            {{ trans('cruds.events.fields.event_date') }}
-                        </th>
-
-                        <th>
-                            {{ trans('cruds.events.fields.event_start_time') }}
+                            {{ trans('cruds.event.fields.event_date') }}
                         </th>
 
                         <th>
-                            {{ trans('cruds.events.fields.event_end_time') }}
+                            {{ trans('cruds.event.fields.event_start_time') }}
+                        </th>
+
+                        <th>
+                            {{ trans('cruds.event.fields.event_end_time') }}
                         </th>
                         
                         <th>
@@ -73,17 +73,17 @@
                             <td>{{ $event->event_description_arabic }}</td>
                             <td>{{ $event->event_date }}</td>
                             <td>{{ $event->event_start_time }}</td>
-                            <td>{{ $event->event_end_date }}</td>
+                            <td>{{ $event->event_end_time }}</td>
                             <td>
                                 <a href="{{ route('admin.events.show', $event->id) }}" class="btn btn-sm btn-primary">View</a>
                                 <a href="{{ route('admin.events.edit', $event->id) }}" class="btn btn-sm btn-info">Edit</a>
-                                @can('user_manage')
+                                
                                 <form action="{{ route('admin.events.destroy', $event->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="submit" class="btn btn-sm btn-danger" value="{{ trans('global.delete') }}">
                                 </form>
-                                @endcan
+                                
                             </td>
                         </tr>
                     @endforeach
