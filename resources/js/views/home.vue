@@ -13,40 +13,28 @@
           <div class="col-sm-8">
             <h1 class="title">Events</h1>
             <div class="card-deck">
-              <div class="card">
-                <img src="/storage/img/event12.jpg" class="card-img-top" alt="..." />
+
+
+              <div class="card" v-for="(event, index) in firstTwoEvents" :key="event.id">
+                <img :src="'images/event/'+eventImages[index]" class="card-img-top" alt="..." />
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-3" style="border-right: 1px #fff solid; padding-left: 0;">
-                      <span class="white">Sep</span>
-                      <h1 class="white">19</h1>
+                      <span class="white">{{ event.event_date | monthFormat }}</span>
+                      <h1 class="white">{{ event.event_date | dayFormat }}</h1>
                     </div>
                     <div class="col-sm-9">
                       <ul>
-                        <li class="white">5:00 PM - 7:00 PM</li>
+                        <li class="white">{{ event.event_start_time | timeFormat }} - {{ event.event_end_time | timeFormat }}</li>
                       </ul>
-                      <router-link to="/Event12" class="card-title" exact>The visit of specialized technical committee</router-link>
+                      <router-link to="/Event12" class="card-title" exact v-if="$store.getters.getLanguage == 'eng'">{{ event.event_title }}</router-link>
+                      <router-link to="/Event12" class="card-title text-right" dir="rtl" exact v-else>{{ event.event_title_arabic }}</router-link>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="card">
-                <img src="/storage/faculty/event2.jpg" class="card-img-top" alt="..." />
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-sm-3" style="border-right: 1px #fff solid; padding-left: 0;">
-                      <span class="white">Oct</span>
-                      <h1 class="white">31</h1>
-                    </div>
-                    <div class="col-sm-9">
-                      <ul>
-                        <li class="white">2:00 PM - 9:00 PM</li>
-                      </ul>
-                      <router-link to="/Event2" class="card-title" exact>Awareness Youth Campaign</router-link>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
+
             </div>
           </div>
           <div class="col-sm-4">
@@ -386,7 +374,135 @@ export default {
   {
     return {
       link: [],
-      renderComponent: true
+      events: [],
+      firstTwoEvents: [],
+      lastThreeEvents: [],
+      renderComponent: true,
+      eventImages: []
+    }
+  },
+  filters: {
+    timeFormat(time) {
+
+      let T = time.split(':');
+      let mainTime = T[0];
+
+      if(mainTime == '00') {
+        return '12' + ':' + T[1] + ' '  + 'AM';
+      }
+
+      else if(mainTime == '01') {
+        return '01' + ':' + T[1] + ' '  + 'AM';
+      }
+
+      else if(mainTime == '02') {
+        return '02' + ':' + T[1] + ' '  + 'AM';
+      }
+
+      else if(mainTime == '03') {
+        return '03' + ':' + T[1] + ' '  + 'AM';
+      }
+
+      else if(mainTime == '04') {
+        return '04' + ':' + T[1] + ' '  + 'AM';
+      }
+
+      else if(mainTime == '05') {
+        return '05' + ':' + T[1] + ' '  + 'AM';
+      }
+
+      else if(mainTime == '06') {
+        return '06' + ':' + T[1] + ' '  + 'AM';
+      }
+
+      else if(mainTime == '07') {
+        return '07' + ':' + T[1] + ' '  + 'AM';
+      }
+
+      else if(mainTime == '08') {
+        return '08' + ':' + T[1] + ' '  + 'AM';
+      }
+
+      else if(mainTime == '09') {
+        return '09' + ':' + T[1] + ' '  + 'AM';
+      }
+
+      else if(mainTime == '10') {
+        return '10' + ':' + T[1] + ' '  + 'AM';
+      }
+
+      else if(mainTime == '11') {
+        return '11' + ':' + T[1] + ' '  + 'AM';
+      }
+
+      else if(mainTime == '12') {
+        return '12' + ':' + T[1] + ' '  + 'PM';
+      }
+
+      else if(mainTime == '13') {
+        return '01' + ':' + T[1] + ' '  + 'PM';
+      }
+
+      else if(mainTime == '14') {
+        return '02' + ':' + T[1] + ' '  + 'PM';
+      }
+
+      else if(mainTime == '15') {
+        return '03' + ':' + T[1] + ' '  + 'PM';
+      }
+
+      else if(mainTime == '16') {
+        return '04' + ':' + T[1] + ' '  + 'PM';
+      }
+
+      else if(mainTime == '17') {
+        return '05' + ':' + T[1] + ' '  + 'PM';
+      }
+
+      else if(mainTime == '18') {
+        return '06' + ':' + T[1] + ' '  + 'PM';
+      }
+
+      else if(mainTime == '19') {
+        return '07' + ':' + T[1] + ' '  + 'PM';
+      }
+
+      else if(mainTime == '20') {
+        return '08' + ':' + T[1] + ' '  + 'PM';
+      }
+
+      else if(mainTime == '21') {
+        return '09' + ':' + T[1] + ' '  + 'PM';
+      }
+
+      else if(mainTime == '22') {
+        return '10' + ':' + T[1] + ' '  + 'PM';
+      }
+
+      else if(mainTime == '23') {
+        return '11' + ':' + T[1] + ' '  + 'PM';
+      }
+
+      else if(mainTime == '24') {
+        return '12' + ':' + T[1] + ' '  + 'PM';
+      }
+
+    },
+    monthFormat(value) {
+      let dateValue = value.split('-');
+      let month = dateValue[1];
+      if(month == 1) return 'Jan';
+      else if(month == 2) return 'Feb';
+      else if(month == 3) return 'Mar';
+      else if(month == 4) return 'Apr';
+      else if(month == 5) return 'May';
+      else if(month == 6) return 'Jun';
+      else if(month == 7) return 'Jul';
+      else if(month == 8) return 'Aug';
+      else if(month == 9) return 'Sep';
+      else if(month == 10) return 'Oct';
+      else if(month == 11) return 'Nov';
+      else return 'Dec';
     }
   },
   methods: {
@@ -394,7 +510,27 @@ export default {
       this.$http.get('api/sliders')
       .then( (res) => {
         this.link = res.data.sliders;
-        console.log("Slider: ", res.data.sliders);
+      })
+    },
+    getEvents() {
+      this.$http.get('api/events')
+      .then( (res) => {
+        this.events = res.data.homeevents;
+
+        this.firstTwoEvents = this.events.slice(0, 2);
+        this.lastThreeEvents = this.events.slice(2, 5);
+
+        for(let i = 0; i < 5; i++)
+        {
+          let eventID = this.events[i].id;
+          this.$http.get('api/event/image/' + eventID)
+          .then( (res) => {
+              this.eventImages.push(res.data.image.event_image);
+          });
+        }
+        
+        console.log("Event Images: ", this.eventImages);
+
       })
     }
   },
@@ -405,6 +541,7 @@ export default {
   },
   mounted() {
     this.getSliders();
+    this.getEvents();
   }
 };
 </script>

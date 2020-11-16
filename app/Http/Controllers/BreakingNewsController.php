@@ -11,7 +11,7 @@ class BreakingNewsController extends Controller
     public function newsList() 
     {
         $today = date('Y-m-d');
-        $breakingnews = BreakingNews::where('news_start_date', '>=', $today)->get();
+        $breakingnews = BreakingNews::where('news_end_date', '>=', $today)->get();
         return response()->json([
             'breakingnews' => $breakingnews
         ]);

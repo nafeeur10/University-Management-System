@@ -4,19 +4,15 @@
             <article class="media">
                 <span class="breaking-news media-left" v-if="$store.getters.getLanguage == 'eng'">Breaking News</span>
                 <span class="breaking-news media-left" v-else>أخبار عاجلة</span>
-                <div class="media-content">
+                <div class="media-content" v-if="$store.getters.getLanguage == 'eng'">
                     <span class="time"></span>
-                    <transition name="fade" tag="div" mode="out-in">
-                        <a 
+                    <transition name="fade" mode="out-in">
+                        <a
                             :href="news.news_main_link" 
                             class="news" 
                             v-for="news in newsList" 
                             :key="news.id"
-                        >
-                            <span v-if="$store.getters.getLanguage == 'eng'">{{ news.news_title }}</span>
-                            <span class="text-right float-right" dir="rtl" v-else>{{ news.news_title_arabic }}</span>
-                        </a>
-                        
+                        >{{ news.news_title }}</a>
                     </transition>
                 </div>
             </article>
@@ -29,7 +25,7 @@
         data() {
            return {
                tickerLocation: 0,
-               news: [
+               newsFlag: [
                    true,
                    false,
                    false,
@@ -52,8 +48,8 @@
             },
             getNewsList() {
                 this.$http.get('api/getnews').then( (res) => {
-                    //console.log("News: ", res.data.breakingnews);
                     this.newsList = res.data.breakingnews
+                    console.log("News: ",res.data.breakingnews);
                 }).catch( (err) => {
                     alert("Something Wrong");
                 })

@@ -17,3 +17,7 @@ Route::get('/sliders', 'HomeSliderController@getSliders');
 Route::get('/getnews', 'BreakingNewsController@newsList')->name('newslist');
 Route::get('/getwelcomeinfo', 'WelcomeMessageController@getwelcomeinfo')->name('welcomeinfo');
 Route::get('/getallfaculty', 'HomeFacultyController@getAllFaculty')->name('facultyinfo');
+
+// Event
+Route::get('events', 'HomeEventAPIController@index');
+Route::get('event/image/{id}', 'HomeEventAPIController@getEventImage');

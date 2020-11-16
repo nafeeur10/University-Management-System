@@ -15,12 +15,12 @@ Route::get('/', function(){
     {
         DB::table('visitors_information')->insert([
             'ip' => $ip,
-            'country' => $location_details->countryName,
-            'state' => $location_details->cityName,
-            'postCode' => $location_details->zipCode,
+            'country' => 'Bangladesh',
+            'state' => 'Dhaka',
+            'postCode' => 6680,
             'isOnline' => 1,
-            'created_at' =>$date,
-            'updated_at' =>$date
+            'created_at' => $date,
+            'updated_at' => $date
         ]);
     }
     return view('welcome');
