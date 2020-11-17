@@ -6,6 +6,7 @@ use App\HomeEvents;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Foreach_;
 
 class HomeEventAPIController extends Controller
 {
@@ -38,8 +39,16 @@ class HomeEventAPIController extends Controller
     public function getAll()
     {
         $allevents = HomeEvents::all();
+        $eventImages = [];
+
+        foreach($allevents as $event) {
+            $id = $event->id;
+            $image = DB::table('home_events_images')->where('event_id', $id)->first();
+            array_push($eventImages, $image);
+        }
         return response()->json([
-            'events' => $allevents
+            'events' => $allevents,
+            'eventImages' => $eventImages
         ]);
     }
 }

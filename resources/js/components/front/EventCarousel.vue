@@ -4,7 +4,6 @@
       id="carousel-1"
       v-model="slide"
       :interval="10000"
-
       indicators
       background="#ababab"
       img-width="1024"
@@ -40,7 +39,7 @@
                   target="_blank">Apply Now</a>
               </div>
 
-              <h1 v-else class="content">{{ text }}</h1>
+              <h1 v-else class="content" :class="$store.getters.getLanguage == 'arb' ? 'text-right border-left-0 mr-3 pr-3' : ''">{{ text }}</h1>
 
           </template>
 
@@ -109,6 +108,11 @@
     font-size: 37px !important;
     margin-left: -1.9em;
     text-align: left;
+}
+
+.border-left-0 {
+  border-left: 0;
+  border-right: 7px solid #c20000;
 }
   .home{
       position: absolute;

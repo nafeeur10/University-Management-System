@@ -1,7 +1,7 @@
 <template>
   <div>
-    <carousel :link="link" :id="id" :text="text[0].event_title" v-if="$store.getters.getLanguage == 'eng'"/>
-    <carousel :link="link" :id="id" :text="text[0].event_title_arabic" v-else/>
+    <carousel v-if="$store.getters.getLanguage == 'eng'" :link="link" :id="id" :text="text[0].event_title" />
+    <carousel v-if="$store.getters.getLanguage == 'arb'" :link="link" :id="id" :text="text[0].event_title_arabic" />
     
     <breadcrumb :id="id"/>
     <description style="margin-bottom: 70px;" :id="id" />

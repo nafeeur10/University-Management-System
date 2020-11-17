@@ -28,8 +28,8 @@
               </router-link>
             </li>
             <li class="nav-item upper_li">
-              <a class="nav-link" href="/Events" v-if="lang==='eng'">Events</a>
-              <a class="nav-link" href="/Events" v-else>الأحداث</a>
+              <router-link class="nav-link" to="/Events" v-if="lang ==='eng'">Events</router-link>
+              <router-link class="nav-link" to="/Events" v-else>الأحداث</router-link>
               
             </li>
             <li class="nav-item upper_li">
