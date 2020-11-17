@@ -19,16 +19,17 @@
                 <img :src="'images/event/'+eventImages[index]" class="card-img-top" alt="..." />
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-sm-3" style="border-right: 1px #fff solid; padding-left: 0;">
+                    <div class="col-sm-3" style="border-right: 1px #fff solid; padding-left: 0;" :class="$store.getters.getLanguage == 'arb' ? 'text-right': '' ">
                       <span class="white">{{ event.event_date | monthFormat }}</span>
                       <h1 class="white">{{ event.event_date | dayFormat }}</h1>
                     </div>
                     <div class="col-sm-9">
-                      <ul>
-                        <li class="white">{{ event.event_start_time | timeFormat }} - {{ event.event_end_time | timeFormat }}</li>
+                      <ul :class="$store.getters.getLanguage == 'arb' ? 'pr-0' : ''">
+                        <li class="white" v-if="$store.getters.getLanguage == 'eng'">{{ event.event_start_time | timeFormat }} - {{ event.event_end_time | timeFormat }}</li>
+                        <li class="white text-right" style="direction: ltr;" v-else>{{ event.event_start_time | timeFormat }} - {{ event.event_end_time | timeFormat }}</li>
                       </ul>
-                      <router-link to="/Event12" class="card-title" exact v-if="$store.getters.getLanguage == 'eng'">{{ event.event_title }}</router-link>
-                      <router-link to="/Event12" class="card-title text-right" dir="rtl" exact v-else>{{ event.event_title_arabic }}</router-link>
+                      <router-link :to="{ name: 'Event', params: { id: event.id } }" class="card-title" exact v-if="$store.getters.getLanguage == 'eng'">{{ event.event_title }}</router-link>
+                      <router-link :to="{ name: 'Event', params: { id: event.id } }" class="card-title" :class="$store.getters.getLanguage == 'arb' ? 'w-100 d-block text-right': ''" dir="rtl" exact v-else>{{ event.event_title_arabic }}</router-link>
                     </div>
                   </div>
                 </div>
@@ -42,49 +43,23 @@
               <router-link to="/Events" class="more white" exact title="Events"><small>VIEW ALL EVENTS</small></router-link>
             </div>
             <div class="right">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-3" style="border-right: 1px #fff solid; padding-left: 0;">
-                    <span class="white">Apr</span>
-                    <h1 class="white">05</h1>
-                  </div>
-                  <div class="col-sm-9">
-                    <ul>
-                      <li class="white">5:00 PM - 7:00 PM</li>
-                    </ul>
-                    <router-link to="/Event3" class="card-title" exact>Competition for the best awareness video about Coronavirus</router-link>
-                  </div>
-                </div>
-              </div>
-              <hr style="margin: 0;border-color: #fff;" />
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-3" style="border-right: 1px #fff solid; padding-left: 0;">
-                    <span class="white">Aug</span>
-                    <h1 class="white">08</h1>
-                  </div>
-                  <div class="col-sm-9">
-                    <ul>
-                      <li class="white">4:00 PM - 7:00 PM</li>
-                    </ul>
-                    <router-link to="/Event4" class="card-title" exact>The Russian role in the Middle East</router-link>
+              <div v-for="(event, index) in lastThreeEvents" :key="event.id">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3" style="border-right: 1px #fff solid; padding-left: 0;" :class="$store.getters.getLanguage == 'arb' ? 'text-right' : ''">
+                      <span class="white">{{ event.event_date | monthFormat }}</span>
+                      <h1 class="white">{{ event.event_date | dayFormat }}</h1>
+                    </div>
+                    <div class="col-sm-9" :class="$store.getters.getLanguage == 'arb' ? 'text-right' : ''">
+                      <ul>
+                        <li class="white" style="direction: ltr;">{{ event.event_start_time | timeFormat }} - {{ event.event_end_time | timeFormat }}</li>
+                      </ul>
+                      <router-link :to="{ name: 'Event', params: { id: event.id } }" class="card-title" exact v-if="$store.getters.getLanguage == 'eng'">{{ event.event_title }}</router-link>
+                      <router-link :to="{ name: 'Event', params: { id: event.id } }" class="card-title text-right" exact v-else>{{ event.event_title_arabic }}</router-link>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <hr style="margin: 0;border-color: #fff;" />
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-3" style="border-right: 1px #fff solid; padding-left: 0;">
-                    <span class="white">May</span>
-                    <h1 class="white">03</h1>
-                  </div>
-                  <div class="col-sm-9">
-                    <ul>
-                      <li class="white">5:00 PM - 7:00 PM</li>
-                    </ul>
-                    <router-link to="/Event5" class="card-title" exact>Electronic sports tournament</router-link>
-                  </div>
-                </div>
+                <hr style="margin: 0;border-color: #fff;" v-if="index!=2"/>
               </div>
             </div>
           </div>
@@ -503,6 +478,10 @@ export default {
       else if(month == 10) return 'Oct';
       else if(month == 11) return 'Nov';
       else return 'Dec';
+    },
+    dayFormat(value) {
+      let dateValue = value.split('-');
+      return dateValue[2];
     }
   },
   methods: {
@@ -520,7 +499,7 @@ export default {
         this.firstTwoEvents = this.events.slice(0, 2);
         this.lastThreeEvents = this.events.slice(2, 5);
 
-        for(let i = 0; i < 5; i++)
+        for(let i = 0; i < 2; i++)
         {
           let eventID = this.events[i].id;
           this.$http.get('api/event/image/' + eventID)
@@ -529,7 +508,7 @@ export default {
           });
         }
         
-        console.log("Event Images: ", this.eventImages);
+        //console.log("Event Images: ", this.eventImages);
 
       })
     }

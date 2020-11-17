@@ -24,4 +24,22 @@ class HomeEventAPIController extends Controller
             'image' => $image
         ]);
     }
+
+    public function getEventDescription($id)
+    {
+        $eventDescription = HomeEvents::where('id', $id)->get();
+        $eventImages = DB::table('home_events_images')->where('event_id', $id)->get();
+        return response()->json([
+            'eventDescription' => $eventDescription,
+            'eventImages' => $eventImages
+        ]);
+    }
+
+    public function getAll()
+    {
+        $allevents = HomeEvents::all();
+        return response()->json([
+            'events' => $allevents
+        ]);
+    }
 }

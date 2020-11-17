@@ -21,3 +21,4 @@ Route::get('/getallfaculty', 'HomeFacultyController@getAllFaculty')->name('facul
 // Event
 Route::get('events', 'HomeEventAPIController@index');
 Route::get('event/image/{id}', 'HomeEventAPIController@getEventImage');
+Route::get('event/description/{id}', 'HomeEventAPIController@getEventDescription');

@@ -59,6 +59,7 @@ import Pharmacology from './views/Pharmacology.vue';
 import Pharmacy_Practice from './views/Pharmacy_Practice.vue';
 import Events from './views/Events.vue';
 import Event1 from './views/Event1.vue';
+import Event from './views/Event.vue';
 import Event2 from './views/Event2.vue';
 import Event3 from './views/Event3.vue';
 import Event4 from './views/Event4.vue';
@@ -713,15 +714,16 @@ export const routes = [
         }
     },
     {
-        path: "/Event1",
-        name: "Event1",
-        component: Event1,
-        titulo: 'Event1',
+        path: "/Event/:id",
+        name: "Event",
+        component: Event,
+        titulo: 'Event',
         menu: true,
         meta: {
-            title: "Event1",
-            breadCrumb: "Event1"
-        }
+            title: "Event",
+            breadCrumb: "Event"
+        },
+        props: true
     },
     {
         path: "/Event2",

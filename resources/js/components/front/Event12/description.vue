@@ -1,7 +1,8 @@
 <template>
   <div class="container service">
     <h2>The visit of specialized technical committee</h2>
-    <p>      
+    <p> 
+      {{ id }}     
       Within the framework of the procedures of the Faculty of Management, Professional Technology and Computers to open a course program in the field of "Advanced Computing", starting from the academic year 2020/2021, in the specialization of artificial intelligence and in the specialization of data science. In this regard, the university welcomed the specialized technical committee formed by the Council of Private Universities and Al- Ahliyya Universities on 09/19/2020 which included  experiencied specialists in the field of computersfrom different universities to consider the start of study in the two programs and determine the numbers of the accepted students in them, noting that the two programs’ statues had previously obtained  the approval of the Committee of the Computer Science and Informatics Sector of the Supreme Council of Universities which allowed the commencement of study in them.
       The committee was briefed on the human and material capabilities allocated to the two programs, including the number of faculty members and their assistants, halls and specialized laboratories. The committee met the faculty members and expressed its satisfaction with the care it found in preparing for the start of study in the two programs. The start of the study in the two programs will be announced and applications will be accepted as once the ministerial decision is issued to start the study in the two programs
       The university seeks to open the two course programs mentioned within its plan to provide a set of distinguished study programs that are compatible with the vision of Egypt 2030, the requirements of the twenty-first century and the future requirements of the labor market in order to ensure qualifying the graduates of these programs with the information, competencies and skills that distinguish them in the labor market. 
@@ -12,10 +13,10 @@
 
     <!-- row Loop -->
     <div
-            v-if="tapId == c.id"
-            v-for="(c, k) in content"
-            :key="k"
-            class="row"
+      v-if="tapId == c.id"
+      v-for="(c, k) in content"
+      :key="k"
+      class="row"
     >
       <div class="col-lg-3 no-padding">
         <div class="bake">
@@ -25,19 +26,19 @@
       </div>
       <div class="col-lg-9 no-padding">
         <b-carousel
-                id="carousel-fade"
-                style="text-shadow: 0px 0px 2px #000"
-                :interval="2500"
-                controls
-                indicators
-                indicators
-                img-width="1024"
-                img-height="480"
+          id="carousel-fade"
+          style="text-shadow: 0px 0px 2px #000"
+          :interval="2500"
+          controls
+          indicators
+          indicators
+          img-width="1024"
+          img-height="480"
         >
           <b-carousel-slide
-                  v-for="(i, km) in c.imgs"
-                  :key="km"
-                  :img-src="i"
+            v-for="(i, km) in c.imgs"
+            :key="km"
+            :img-src="i"
           ></b-carousel-slide>
 
         </b-carousel>
@@ -52,41 +53,42 @@
 
 <script>
     export default {
-        data() {
-            return {
-                tapId: 1,
-                btns: [
-                    {
-                        id: 1,
-                        name: 'Clubs',
-                    },
-                    {
-                        id: 2,
-                        name: 'Cinemas',
-                    },
-                    {
-                        id: 3,
-                        name: 'Theater',
-                    }
-                ],
-                content: [
-                    {
-                        id: 1,
-                        imgs: [
-                            '/storage/img/event12-1.jpg',
-                            '/storage/img/event12-2.jpg',
-                            '/storage/img/event12-3.jpg',
-                            '/storage/img/event12-4.jpg',
-                            '/storage/img/event12-5.jpg',
-                            '/storage/img/event12-6.jpg',
-                            '/storage/img/event12-7.jpg',
-                        ],
-                        title: 'The visit of specialized technical committee',
-                        desc: 'Within the framework of the procedures of the Faculty of Management, Professional Technology and Computers to open a course program in the field of "Advanced Computing", starting from the academic year 2020/2021, in the specialization of artificial intelligence and in the specialization of data science.'
-                    },
-                ]
-            }
-        }
+      props: ['id'],
+      data() {
+          return {
+              tapId: 1,
+              btns: [
+                  {
+                      id: 1,
+                      name: 'Clubs',
+                  },
+                  {
+                      id: 2,
+                      name: 'Cinemas',
+                  },
+                  {
+                      id: 3,
+                      name: 'Theater',
+                  }
+              ],
+              content: [
+                  {
+                      id: 1,
+                      imgs: [
+                          '/storage/img/event12-1.jpg',
+                          '/storage/img/event12-2.jpg',
+                          '/storage/img/event12-3.jpg',
+                          '/storage/img/event12-4.jpg',
+                          '/storage/img/event12-5.jpg',
+                          '/storage/img/event12-6.jpg',
+                          '/storage/img/event12-7.jpg',
+                      ],
+                      title: 'The visit of specialized technical committee',
+                      desc: 'Within the framework of the procedures of the Faculty of Management, Professional Technology and Computers to open a course program in the field of "Advanced Computing", starting from the academic year 2020/2021, in the specialization of artificial intelligence and in the specialization of data science.'
+                  },
+              ]
+          }
+      }
     }
 </script>
 
