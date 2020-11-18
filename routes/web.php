@@ -60,6 +60,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::get('/event/images/{id}', 'HomeEventsController@getImages');
     Route::post('/event/images/delete/{image_name}', 'HomeEventsController@deleteEventImage');
     
+    Route::resource('latest_news', 'LatestNewsController');
+    
     Route::get('social_contact', 'ContactController@social')->name('contact.social');
     Route::post('social_contact_store', 'ContactController@social_store')->name('contact.social-media.store');
     Route::get('social_contact_show/{id}', 'ContactController@social_show')->name('contact.socials.show');

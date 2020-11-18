@@ -234,5 +234,30 @@ return [
             'event_end_time' => 'Event End Time',
             'event_end_time_helper' => '',
         ]
+    ],
+    'latest_news' => [
+        'title' => 'Latest News',
+        'fields' => [
+            'id' => 'ID',
+            'images' => 'Images',
+            'news_home_title' => 'Title for Homepage',
+            'news_home_title_helper' => '',
+            'news_single_title' => 'Title for Single News',
+            'news_single_title_helper' => '',
+            'news_single_title_arabic' => 'Title for Single News (Arabic)',
+            'news_single_title_arabic_helper' => '',
+            'news_home_title_arabic' => 'Title for Homepage (Arabic)',
+            'news_home_title_arabic_helper' => '',
+            'news_description' => 'Description',
+            'news_description_helper' => '',
+            'news_description_arabic' => 'Description (Arabic)',
+            'news_description_arabic_helper' => '',
+            'news_slider_description' => 'Description for Slider',
+            'news_slider_description_helper' => '',
+            'news_slider_description_arabic' => 'Description for Slider (Arabic)',
+            'news_slider_description_arabic_helper' => '',
+            'news_date' => 'Latest News Date',
+            'news_date_helper' => '',
+        ]
     ]
 ];
