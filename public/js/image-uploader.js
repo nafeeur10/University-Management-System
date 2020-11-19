@@ -157,33 +157,41 @@
                 prevent(e);
             });
 
+
+
             // Set delete action
             $button.on("click", function (e) {
                 // Prevent browser default event and stop propagation
                 prevent(e);
                 let deleteImage = $(this).parent().find('img').attr('src');
+
                 var parts = deleteImage.split('/');
                 var answer = parts[parts.length - 1];
 
-                // Ajax Setup
+                // if it comes from image folder then it will call otherwise it will not call.
+                if(parts[1] == 'images') {
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                
-                // ajax call to delete that image from Database and Local Storage
-                $.ajax({
-                    type: 'POST',
-                    url: '/admin/event/images/delete/'+answer,
-                    success: function(res) {
-                        toastr.success('Image Deleted Successfully');
-                    },
-                    error: function(error) {
-                        console.log(error);
-                    }
-                })
+                    // Ajax Setup
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    
+                    // ajax call to delete that image from Database and Local Storage
+                    $.ajax({
+                        type: 'POST',
+                        url: '/admin/' + parts[2] + '/images/delete/'+answer,
+                        success: function(res) {
+                            toastr.success('Image Deleted Successfully');
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+
+                }
 
                 // If is not a preloaded image
                 if ($container.data('index')) {

@@ -7,169 +7,217 @@
     </div>
 @endif
 
+@if (\Session::has('success'))
+    <div class="alert alert-success">
+        {!! \Session::get('success') !!}
+    </div>
+@endif
+
+
 <div class="card">
     <div class="card-header">
-        {{ trans('global.create') }} {{ trans('cruds.event.title') }}
+        {{ trans('global.update') }} {{ trans('cruds.latest_news.title') }}
     </div>
 
     <div class="card-body">
         <form 
-            action="{{ route('admin.events.update', [$event->id]) }}" 
+            action="{{ route('admin.latest_news.update', [$news->id]) }}" 
             method="POST" 
             enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
             <div class="form-group">
-                <label for="event-image-preview">{{ trans('global.upload') }} {{ trans('cruds.event.fields.images') }}</label>
+                <label for="latest-news-image-preview">{{ trans('global.upload') }} {{ trans('cruds.latest_news.fields.images') }}</label>
                 <div class="input-images"></div>
             </div>
 
-            <input type="hidden" id="event_id" value="{{ $event->id }}">
+            <input type="hidden" id="news_id" value="{{ $news->id }}">
             
-            <div class="form-group {{ $errors->has('event_title') ? 'has-error' : '' }}">
-                <label for="event_title">{{ trans('cruds.event.fields.event_title') }}*</label>
-                <input type="text" id="event_title" name="event_title" class="form-control" value="{{ old('event_title', isset($event) ? $event->event_title : '') }}" required>
-                @if($errors->has('event_title'))
+            <!-- Hompage Title for Every Latest News -->
+            <div class="form-group {{ $errors->has('news_home_title') ? 'has-error' : '' }}">
+                <label for="news_home_title">{{ trans('cruds.latest_news.fields.news_home_title') }}*</label>
+                <input type="text" id="news_home_title" name="news_home_title" class="form-control" value="{{ old('news_home_title', isset($news) ? $news->news_home_title : '') }}" required>
+                @if($errors->has('news_home_title'))
                     <em class="invalid-feedback">
-                        {{ $errors->first('event_title') }}
+                        {{ $errors->first('news_home_title') }}
                     </em>
                 @endif
                 <p class="helper-block">
-                    {{ trans('cruds.event.fields.event_title_helper') }}
+                    {{ trans('cruds.latest_news.fields.news_home_title_helper') }}
                 </p>
             </div>
 
-            <div class="form-group {{ $errors->has('event_title_arabic') ? 'has-error' : '' }}">
-                <label for="event_title_arabic">{{ trans('cruds.event.fields.event_title_arabic') }}*</label>
+            <!-- Hompage Title in Arabic for Every Latest News -->
+            <div class="form-group {{ $errors->has('news_home_title_arabic') ? 'has-error' : '' }}">
+                <label for="news_home_title_arabic">{{ trans('cruds.latest_news.fields.news_home_title_arabic') }}*</label>
                 <input 
                     type="text" 
-                    id="event_title_arabic" 
-                    name="event_title_arabic" 
+                    id="news_home_title_arabic" 
+                    name="news_home_title_arabic" 
                     class="form-control text-right"
                     dir="rtl" 
-                    value="{{ old('event_title_arabic', isset($event) ? $event->event_title_arabic : '') }}" 
+                    value="{{ old('news_home_title_arabic', isset($news) ? $news->news_home_title_arabic : '') }}" 
                     required
                 >
-                @if($errors->has('event_title_arabic'))
+                @if($errors->has('news_home_title_arabic'))
                     <em class="invalid-feedback">
-                        {{ $errors->first('event_title_arabic') }}
+                        {{ $errors->first('news_home_title_arabic') }}
                     </em>
                 @endif
                 <p class="helper-block">
-                    {{ trans('cruds.event.fields.event_title_arabic_helper') }}
+                    {{ trans('cruds.latest_news.fields.news_home_title_arabic_helper') }}
                 </p>
             </div>
 
 
-            <div class="form-group {{ $errors->has('event_description') ? 'has-error' : '' }}">
-                <label for="event_description">{{ trans('cruds.event.fields.event_description') }}*</label>
+            <!-- Single Latest News Title for Every Latest News -->
+            <div class="form-group {{ $errors->has('news_single_title') ? 'has-error' : '' }}">
+                <label for="news_single_title">{{ trans('cruds.latest_news.fields.news_single_title') }}*</label>
+                <input type="text" id="news_single_title" name="news_single_title" class="form-control" value="{{ old('news_single_title', isset($news) ? $news->news_single_title : '') }}" required>
+                @if($errors->has('news_single_title'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('news_single_title') }}
+                    </em>
+                @endif
+                <p class="helper-block">
+                    {{ trans('cruds.latest_news.fields.news_single_title_helper') }}
+                </p>
+            </div>
+
+            <!-- Single Latest News Title in Arabic for Every Latest News -->
+            <div class="form-group {{ $errors->has('news_single_title_arabic') ? 'has-error' : '' }}">
+                <label for="news_single_title_arabic">{{ trans('cruds.latest_news.fields.news_single_title_arabic') }}*</label>
+                <input 
+                    type="text" 
+                    id="news_single_title_arabic" 
+                    name="news_single_title_arabic" 
+                    class="form-control text-right"
+                    dir="rtl" 
+                    value="{{ old('news_single_title_arabic', isset($news) ? $news->news_single_title_arabic : '') }}" 
+                    required
+                >
+                @if($errors->has('news_single_title_arabic'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('news_single_title_arabic') }}
+                    </em>
+                @endif
+                <p class="helper-block">
+                    {{ trans('cruds.latest_news.fields.news_single_title_arabic_helper') }}
+                </p>
+            </div>
+
+
+            <!-- Latest News Description -->
+            <div class="form-group {{ $errors->has('news_description') ? 'has-error' : '' }}">
+                <label for="news_description">{{ trans('cruds.latest_news.fields.news_description') }}*</label>
                 <textarea 
                     type="text" 
                     rows="5"
-                    id="event_description" 
-                    name="event_description" 
+                    id="news_description" 
+                    name="news_description" 
                     class="form-control"  
                     required
-                >{{ old('event_description', isset($event) ? $event->event_description : '') }}</textarea>
-                @if($errors->has('event_description'))
+                >{{ old('news_description', isset($news) ? $news->news_description : '') }}</textarea>
+                @if($errors->has('news_description'))
                     <em class="invalid-feedback">
-                        {{ $errors->first('event_description') }}
+                        {{ $errors->first('news_description') }}
                     </em>
                 @endif
                 <p class="helper-block">
-                    {{ trans('cruds.event.fields.event_description_helper') }}
+                    {{ trans('cruds.latest_news.fields.news_description_helper') }}
                 </p>
             </div>
 
 
-            <div class="form-group {{ $errors->has('event_description_arabic') ? 'has-error' : '' }}">
-                <label for="event_description_arabic">{{ trans('cruds.event.fields.event_description_arabic') }}*</label>
+            <!-- Latest News Description in Arabic -->
+            <div class="form-group {{ $errors->has('news_description_arabic') ? 'has-error' : '' }}">
+                <label for="news_description_arabic">{{ trans('cruds.latest_news.fields.news_description_arabic') }}*</label>
                 <textarea
                     type="text" 
                     rows="5"
-                    id="event_description_arabic" 
-                    name="event_description_arabic" 
+                    id="news_description_arabic" 
+                    name="news_description_arabic" 
                     class="form-control text-right"
                     dir="rtl" 
                     required
-                >{{ old('event_description_arabic', isset($event) ? $event->event_description_arabic : '') }}</textarea>
-                @if($errors->has('event_description_arabic'))
+                >{{ old('news_description_arabic', isset($news) ? $news->news_description_arabic : '') }}</textarea>
+                @if($errors->has('news_description_arabic'))
                     <em class="invalid-feedback">
-                        {{ $errors->first('event_description_arabic') }}
+                        {{ $errors->first('news_description_arabic') }}
                     </em>
                 @endif
                 <p class="helper-block">
-                    {{ trans('cruds.event.fields.event_description_arabic_helper') }}
+                    {{ trans('cruds.latest_news.fields.news_description_arabic_helper') }}
+                </p>
+            </div>
+
+            <!-- Latest News Description besiders Slider -->
+            <div class="form-group {{ $errors->has('news_slider_description') ? 'has-error' : '' }}">
+                <label for="news_slider_description">{{ trans('cruds.latest_news.fields.news_slider_description') }}*</label>
+                <textarea 
+                    type="text" 
+                    rows="5"
+                    id="news_slider_description" 
+                    name="news_slider_description" 
+                    class="form-control"  
+                    required
+                >{{ old('news_slider_description', isset($news) ? $news->news_slider_description : '') }}</textarea>
+                @if($errors->has('news_slider_description'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('news_slider_description') }}
+                    </em>
+                @endif
+                <p class="helper-block">
+                    {{ trans('cruds.latest_news.fields.news_slider_description_helper') }}
                 </p>
             </div>
 
 
-            <div class="form-group {{ $errors->has('event_date') ? 'has-error' : '' }}">
-                <label for="event_date">{{ trans('cruds.event.fields.event_date') }}</label>
-                <input 
-                    type="date" 
-                    id="event_date" 
-                    name="event_date" 
-                    class="form-control" 
-                    required 
-                    value="{{ old('event_date', isset($event) ? $event->event_date : '') }}"
-                >
-                @if($errors->has('event_date'))
+            <!-- Latest News Description besiders Slider in Arabic -->
+            <div class="form-group {{ $errors->has('news_slider_description_arabic') ? 'has-error' : '' }}">
+                <label for="news_slider_description_arabic">{{ trans('cruds.latest_news.fields.news_slider_description_arabic') }}*</label>
+                <textarea
+                    type="text" 
+                    rows="5"
+                    id="news_slider_description_arabic" 
+                    name="news_slider_description_arabic" 
+                    class="form-control text-right"
+                    dir="rtl" 
+                    required
+                >{{ old('news_slider_description_arabic', isset($news) ? $news->news_slider_description_arabic : '') }}</textarea>
+                @if($errors->has('news_slider_description_arabic'))
                     <em class="invalid-feedback">
-                        {{ $errors->first('event_date') }}
+                        {{ $errors->first('news_slider_description_arabic') }}
                     </em>
                 @endif
                 <p class="helper-block">
-                    {{ trans('cruds.event.fields.event_date_helper') }}
+                    {{ trans('cruds.latest_news.fields.news_slider_description_arabic_helper') }}
+                </p>
+            </div>
+
+
+            <div class="form-group {{ $errors->has('news_date') ? 'has-error' : '' }}">
+                <label for="news_date">{{ trans('cruds.latest_news.fields.news_date') }}</label>
+                <input 
+                    type="date" 
+                    id="news_date" 
+                    name="news_date" 
+                    class="form-control" 
+                    required 
+                    value="{{ old('news_date', isset($news) ? $news->news_date : '') }}"
+                >
+                @if($errors->has('news_date'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('news_date') }}
+                    </em>
+                @endif
+                <p class="helper-block">
+                    {{ trans('cruds.latest_news.fields.news_date_helper') }}
                 </p>
             </div> 
 
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group {{ $errors->has('event_start_time') ? 'has-error' : '' }}">
-                        <label for="event_start_time">{{ trans('cruds.event.fields.event_start_time') }}</label>
-                        <input 
-                            type="time" 
-                            id="event_start_time" 
-                            name="event_start_time" 
-                            class="form-control" 
-                            required 
-                            value="{{ old('event_start_time', isset($event) ? $event->event_start_time : '') }}"
-                        >
-                        @if($errors->has('event_start_time'))
-                            <em class="invalid-feedback">
-                                {{ $errors->first('event_start_time') }}
-                            </em>
-                        @endif
-                        <p class="helper-block">
-                            {{ trans('cruds.event.fields.event_start_time_helper') }}
-                        </p>
-                    </div> 
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group {{ $errors->has('event_end_time') ? 'has-error' : '' }}">
-                        <label for="event_end_time">{{ trans('cruds.event.fields.event_end_time') }}</label>
-                        <input 
-                            type="time" 
-                            id="event_end_time" 
-                            name="event_end_time" 
-                            class="form-control" 
-                            required 
-                            value="{{ old('event_end_time', isset($event) ? $event->event_end_time : '') }}"
-                        >
-                        @if($errors->has('event_end_time'))
-                            <em class="invalid-feedback">
-                                {{ $errors->first('event_end_time') }}
-                            </em>
-                        @endif
-                        <p class="helper-block">
-                            {{ trans('cruds.event.fields.event_end_time_helper') }}
-                        </p>
-                    </div> 
-                </div>
-            </div>
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
             </div>
@@ -183,21 +231,21 @@
 <script type="text/javascript">
     let preloaded = [];
 
-    let id = $("#event_id").val();
-  
+    let id = $("#news_id").val();
+
     $.ajax({
-        url: '/admin/event/images/' + id,
+        url: '/admin/news/images/' + id,
         type: 'GET',
         success: function(res) {
             preloaded = res.images;
-
             let previousImages = [];
 
-            for(let i = 0; i < preloaded.length; i++) {
+            for(let i = 0; i < preloaded.length; i++) 
+            {
                 let obj = {
                     id: preloaded[i].id,
-                    event_id: preloaded[i].event_id,
-                    src: '/images/event/' + preloaded[i].event_image
+                    event_id: preloaded[i].latest_news_id,
+                    src: '/images/news/' + preloaded[i].latest_news_image
                 };
                 previousImages.push(obj);
             }
@@ -205,7 +253,7 @@
 
             $('.input-images').imageUploader({
                 preloaded: previousImages,
-                imagesInputName: 'eventimages',
+                imagesInputName: 'latestNewsImages',
                 preloadedInputName: 'old',
                 label: 'Drag & Drop files here or click to browse'
             }); 

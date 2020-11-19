@@ -87,10 +87,10 @@
                             <td>{{ $news->news_slider_description_arabic }}</td>
                             <td>{{ $news->news_date }}</td>
                             <td>
-                                <a href="{{ route('admin.events.show', $news->id) }}" class="btn btn-sm btn-primary">View</a>
-                                <a href="{{ route('admin.events.edit', $news->id) }}" class="btn btn-sm btn-info">Edit</a>
+                                <a href="{{ route('admin.latest_news.show', $news->id) }}" class="btn btn-sm btn-primary">View</a>
+                                <a href="{{ route('admin.latest_news.edit', $news->id) }}" class="btn btn-sm btn-info">Edit</a>
                                 
-                                <form action="{{ route('admin.events.destroy', $news->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                <form action="{{ route('admin.latest_news.destroy', $news->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="submit" class="btn btn-sm btn-danger" value="{{ trans('global.delete') }}">

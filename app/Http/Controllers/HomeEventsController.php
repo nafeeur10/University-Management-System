@@ -38,7 +38,7 @@ class HomeEventsController extends Controller
         $request->validate([
             'event_title' => 'required',
             'event_title_arabic' => 'required',
-            'event_description_arabic' => 'required',
+            'event_description' => 'required',
             'event_description_arabic' => 'required',
             'event_date' => 'required',
             'event_start_time' => 'required',

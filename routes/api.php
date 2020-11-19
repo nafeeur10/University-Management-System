@@ -23,3 +23,9 @@ Route::get('events', 'HomeEventAPIController@index');
 Route::get('event/image/{id}', 'HomeEventAPIController@getEventImage');
 Route::get('event/description/{id}', 'HomeEventAPIController@getEventDescription');
 Route::get('event/all', 'HomeEventAPIController@getAll');
+
+// Latest News
+Route::get('news', 'LatestNewsAPIController@index');
+Route::get('news/image/{id}', 'LatestNewsAPIController@getNewsImage');
+Route::get('news/description/{id}', 'LatestNewsAPIController@getNewsDescription');
+Route::get('news/all', 'LatestNewsAPIController@getAll');

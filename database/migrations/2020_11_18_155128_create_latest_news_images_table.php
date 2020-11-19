@@ -15,6 +15,10 @@ class CreateLatestNewsImagesTable extends Migration
     {
         Schema::create('latest_news_images', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            $table->unsignedBigInteger('latest_news_id');
+            $table->string('latest_news_image');
+
             $table->timestamps();
         });
     }

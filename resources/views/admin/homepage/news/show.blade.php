@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.event.title') }}
+        {{ trans('global.show') }} {{ trans('cruds.latest_newstitle') }}
     </div>
 
     <div class="card-body">
@@ -12,74 +12,102 @@
                 <tbody>
                     <tr>
                         <th>
-                            {{ trans('cruds.event.fields.id') }}
+                            {{ trans('cruds.latest_news.fields.id') }}
                         </th>
                         <td>
-                            {{ $event->id }}
+                            {{ $news->id }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.event.fields.event_title') }}
+                            {{ trans('cruds.latest_news.fields.news_home_title') }}
                         </th>
                         <td>
-                            {{ $event->event_title }}
+                            {{ $news->news_home_title }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.event.fields.event_title_arabic') }}
+                            {{ trans('cruds.latest_news.fields.news_home_title_arabic') }}
                         </th>
                         <td class="text-right" dir="rtl">
-                            {{ $event->event_title_arabic }}
+                            {{ $news->news_home_title_arabic }}
                         </td>
                     </tr>
+
+
+
                     <tr>
                         <th>
-                            {{ trans('cruds.event.fields.event_description') }}
+                            {{ trans('cruds.latest_news.fields.news_single_title') }}
                         </th>
                         <td>
-                            {{ $event->event_description }}
+                            {{ $news->news_single_title }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.event.fields.event_description_arabic') }}
+                            {{ trans('cruds.latest_news.fields.news_single_title_arabic') }}
                         </th>
                         <td class="text-right" dir="rtl">
-                            {{ $event->event_description_arabic }}
+                            {{ $news->news_single_title_arabic }}
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <th>
+                            {{ trans('cruds.latest_news.fields.news_description') }}
+                        </th>
+                        <td>
+                            {{ $news->news_description }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.event.fields.event_date') }}
+                            {{ trans('cruds.latest_news.fields.news_description_arabic') }}
+                        </th>
+                        <td class="text-right" dir="rtl">
+                            {{ $news->news_description_arabic }}
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <th>
+                            {{ trans('cruds.latest_news.fields.news_slider_description') }}
                         </th>
                         <td>
-                            {{ $event->event_date }}
+                            {{ $news->news_slider_description }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.event.fields.event_start_time') }}
+                            {{ trans('cruds.latest_news.fields.news_slider_description_arabic') }}
                         </th>
-                        <td>
-                            {{ $event->event_start_time }}
+                        <td class="text-right" dir="rtl">
+                            {{ $news->news_slider_description_arabic }}
                         </td>
                     </tr>
+
+
+
                     <tr>
                         <th>
-                            {{ trans('cruds.event.fields.event_end_time') }}
+                            {{ trans('cruds.latest_news.fields.news_date') }}
                         </th>
                         <td>
-                            {{ $event->event_end_time }}
+                            {{ $news->news_date }}
                         </td>
                     </tr>
+
+
                 </tbody>
             </table>
 
             <div class="my-2">
-                @foreach($eventimages as $key => $image)
-                    <img src="{{ asset('images/event/' . $image->event_image ) }}" 
+                @foreach($latestNewsImages as $key => $image)
+                    <img src="{{ asset('images/news/' . $image->latest_news_image ) }}" 
                         class="mr-2" 
                         style="width: 250px; object-fit:cover;"/>
                 @endforeach
