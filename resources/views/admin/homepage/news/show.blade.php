@@ -18,6 +18,8 @@
                             {{ $news->id }}
                         </td>
                     </tr>
+
+
                     <tr>
                         <th>
                             {{ trans('cruds.latest_news.fields.news_home_title') }}
@@ -32,6 +34,23 @@
                         </th>
                         <td class="text-right" dir="rtl">
                             {{ $news->news_home_title_arabic }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>
+                            {{ trans('cruds.latest_news.fields.news_home_description') }}
+                        </th>
+                        <td>
+                            {{ $news->news_home_description }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.latest_news.fields.news_home_description_arabic') }}
+                        </th>
+                        <td class="text-right" dir="rtl">
+                            {{ $news->news_home_description_arabic }}
                         </td>
                     </tr>
 

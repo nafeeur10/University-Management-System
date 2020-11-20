@@ -38,8 +38,8 @@ class LatestNewsController extends Controller
             'news_description' => 'required',
             'news_description_arabic' => 'required',
 
-            'news_slider_description' => 'required',
-            'news_slider_description_arabic' => 'required',
+            'news_home_description' => 'required',
+            'news_home_description_arabic' => 'required',
 
             'news_date' => 'required',
 
@@ -49,6 +49,9 @@ class LatestNewsController extends Controller
         $newNews = new LatestNews();
         $newNews->news_home_title = $request->news_home_title;
         $newNews->news_home_title_arabic = $request->news_home_title_arabic;
+
+        $newNews->news_home_description = $request->news_home_description;
+        $newNews->news_home_description_arabic = $request->news_home_description_arabic;
 
         $newNews->news_single_title = $request->news_single_title;
         $newNews->news_single_title_arabic = $request->news_single_title_arabic;
@@ -147,8 +150,8 @@ class LatestNewsController extends Controller
             'news_description' => 'required',
             'news_description_arabic' => 'required',
 
-            'news_slider_description' => 'required',
-            'news_slider_description_arabic' => 'required',
+            'news_home_description' => 'required',
+            'news_home_description_arabic' => 'required',
 
             'news_date' => 'required',
         ]);
@@ -156,6 +159,9 @@ class LatestNewsController extends Controller
         $newNews = LatestNews::findOrFail($id);
         $newNews->news_home_title = $request->news_home_title;
         $newNews->news_home_title_arabic = $request->news_home_title_arabic;
+
+        $newNews->news_home_description = $request->news_home_description;
+        $newNews->news_home_description_arabic = $request->news_home_description_arabic;
 
         $newNews->news_single_title = $request->news_single_title;
         $newNews->news_single_title_arabic = $request->news_single_title_arabic;

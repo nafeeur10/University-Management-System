@@ -10,7 +10,7 @@ class LatestNewsAPIController extends Controller
 {
     public function index()
     {
-        $homepageNews = LatestNews::orderBy('id', 'desc')->take(5)->get();
+        $homepageNews = LatestNews::orderBy('id', 'desc')->take(3)->get();
         return response()->json([
             'latestNews' => $homepageNews
         ]);

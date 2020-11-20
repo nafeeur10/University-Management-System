@@ -184,7 +184,7 @@
             <!-- {{-- ./Our Partners --}} -->
           </div>
           <div class="col-sm-8">
-            <!-- {{-- Latest --}} -->
+            <!-- {{-- Latest News --}} -->
             <div class="latest">
               <div class="header">
                 <h3>
@@ -203,40 +203,42 @@
               </div>
               <div class="row latest">
                 <div class="col-sm-4 photo1" style="padding-left: 0;padding-right: 0;">
-                  <img src="/storage/img/news1-h.jpg " class="card-img-top" alt="..." />
+                  <img :src="'images/news/'+latestNewsImages[0]" class="card-img-top" alt="..." />
                 </div>
                 <div class="col-sm-4 desc1" style="padding-left: 0;padding-right: 0;">
                   <div class="desc">
-                    <div class="date">April 13,2020</div>
-                    <h4 class="title">Extravaganza</h4>
-                    <div
-                      class="cont"
-                    >Online exhibition of medicinal plants at the Egyptian Russian University</div><br>
+                    <div class="date">{{ latestNews[0].news_date }}</div>
+                    <h4 class="title" v-if="$store.getters.getLanguage == 'eng'">{{ latestNews[0].news_home_title }}</h4>
+                    <h4 class="title" v-else>{{ latestNews[0].news_home_title_arabic }}</h4>
+                    <div class="cont" v-if="$store.getters.getLanguage == 'eng'">{{ latestNews[0].news_home_description }}</div>
+                    <div class="cont" v-else>{{ latestNews[0].news_home_description_arabic }}</div>
+                    <br>
                     <router-link
-                          to="/News1"
-                          class="more"
-                          style="display: block;"
-                          exact
-                          title="News">
+                      :to="{ name: 'SingleNews', params: { id: latestNews[0].id } }"
+                      class="more"
+                      style="display: block;"
+                      exact
+                      title="News">
                     READ MORE
                     <i class="fa fa-arrow-right"></i>
                   </router-link>
                   </div>
                 </div>
                 <div class="col-sm-4 photo2" style="padding-left: 0;padding-right: 0;">
-                  <img src="/storage/img/news3-h.jpg " class="card-img-top" alt="..." />
+                  <img :src="'images/news/'+latestNewsImages[1]" class="card-img-top" alt="..." />
                 </div>
               </div>
               <div class="row latest">
                 <div class="col-sm-4 desc2" style="padding-left: 0;padding-right: 0;">
                   <div class="desc">
-                    <div class="date white">March 09,2020</div>
-                    <h4 class="title">Jalabiya Party</h4>
-                    <div
-                      class="cont"
-                    >Don't let Corona stop you ... Pharmacy students celebrated their graduation with "Jalabiya Party" online</div><br>
+                    <div class="date white">{{ latestNews[1].news_date }}</div>
+                    <h4 class="title" v-if="$store.getters.getLanguage == 'eng'">{{ latestNews[1].news_home_title }}</h4>
+                    <h4 class="title" v-else>{{ latestNews[1].news_home_title_arabic }}</h4>
+                    <div class="cont" v-if="$store.getters.getLanguage == 'eng'">{{ latestNews[1].news_home_description }}</div>
+                    <div class="cont" v-else>{{ latestNews[1].news_home_description_arabic }}</div>
+                    <br>
                     <router-link
-                          to="/News2"
+                          :to="{ name: 'SingleNews', params: { id: latestNews[1].id } }"
                           class="more white"
                           style="display: block;"
                           exact
@@ -247,17 +249,21 @@
                   </div>
                 </div>
                 <div class="col-sm-4 photo3" style="padding-left: 0;padding-right: 0;">
-                  <img src="/storage/img/news2.jpg " class="card-img-top" alt="..." />
+                  <img :src="'images/news/'+latestNewsImages[2]" class="card-img-top" alt="..." />
                 </div>
                 <div class="col-sm-4 desc3" style="padding-left: 0;padding-right: 0;">
                   <div class="desc">
-                    <div class="date text-muted">February 01,2020</div>
-                    <h4 class="title">The first sports forum</h4>
-                    <div
-                      class="cont"
-                    >The Egyptian Russian University participates in the first sports forum for international students</div><br>
+                    <div class="date text-muted">{{ latestNews[1].news_date }}</div>
+                    
+                    <h4 class="title" v-if="$store.getters.getLanguage == 'eng'">{{ latestNews[2].news_home_title }}</h4>
+                    <h4 class="title" v-else>{{ latestNews[2].news_home_title_arabic }}</h4>
+                    
+                    <div class="cont" v-if="$store.getters.getLanguage == 'eng'">{{ latestNews[2].news_home_description }}</div>
+                    <div class="cont" v-else>{{ latestNews[2].news_home_description_arabic }}</div>
+                    
+                    <br>
                     <router-link
-                          to="/News3"
+                          :to="{ name: 'SingleNews', params: { id: latestNews[2].id } }"
                           class="more"
                           style="display: block;"
                           exact
@@ -353,7 +359,10 @@ export default {
       firstTwoEvents: [],
       lastThreeEvents: [],
       renderComponent: true,
-      eventImages: []
+      eventImages: [],
+
+      latestNews: [],
+      latestNewsImages: []
     }
   },
   filters: {
@@ -507,9 +516,21 @@ export default {
               this.eventImages.push(res.data.image.event_image);
           });
         }
-        
-        //console.log("Event Images: ", this.eventImages);
+      })
+    },
+    getLatestNews() {
+      this.$http.get('api/news')
+      .then( (res) => {
+        this.latestNews = res.data.latestNews;
 
+        for(let i = 0; i < 3; i++)
+        {
+          let newsID = this.latestNews[i].id;
+          this.$http.get('api/news/image/' + newsID)
+          .then( (res) => {
+              this.latestNewsImages.push(res.data.image.latest_news_image);
+          });
+        }
       })
     }
   },
@@ -521,6 +542,9 @@ export default {
   mounted() {
     this.getSliders();
     this.getEvents();
+  },
+  created() {
+    this.getLatestNews();
   }
 };
 </script>

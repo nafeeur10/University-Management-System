@@ -25,8 +25,8 @@ class CreateLatestNewsTable extends Migration
             $table->text('news_description');
             $table->text('news_description_arabic');
 
-            $table->text('news_slider_description');
-            $table->text('news_slider_description_arabic');
+            $table->text('news_slider_description')->nullable();
+            $table->text('news_slider_description_arabic')->nullable();
 
             $table->date('news_date');
 

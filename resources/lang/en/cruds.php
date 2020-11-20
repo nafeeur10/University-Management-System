@@ -244,6 +244,12 @@ return [
             'news_home_title_helper' => '',
             'news_single_title' => 'Title for Single News',
             'news_single_title_helper' => '',
+
+            'news_home_description' => 'Description for Homepage',
+            'news_home_description_helper' => '',
+            'news_home_description_arabic' => 'Description for Homepage (Arabic)',
+            'news_home_description_arabic_helper' => '',
+
             'news_single_title_arabic' => 'Title for Single News (Arabic)',
             'news_single_title_arabic_helper' => '',
             'news_home_title_arabic' => 'Title for Homepage (Arabic)',

@@ -71,6 +71,51 @@
             </div>
 
 
+            <!-- Latest News Description for Homepage -->
+            <div class="form-group {{ $errors->has('news_home_description') ? 'has-error' : '' }}">
+                <label for="news_home_description">{{ trans('cruds.latest_news.fields.news_home_description') }}*</label>
+                <textarea 
+                    type="text" 
+                    rows="5"
+                    id="news_home_description" 
+                    name="news_home_description" 
+                    class="form-control"  
+                    required
+                >{{ old('news_home_description', isset($news) ? $news->news_home_description : '') }}</textarea>
+                @if($errors->has('news_home_description'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('news_home_description') }}
+                    </em>
+                @endif
+                <p class="helper-block">
+                    {{ trans('cruds.latest_news.fields.news_home_description_helper') }}
+                </p>
+            </div>
+
+
+            <!-- Latest News Description for Homepage in Arabic -->
+            <div class="form-group {{ $errors->has('news_home_description_arabic') ? 'has-error' : '' }}">
+                <label for="news_home_description_arabic">{{ trans('cruds.latest_news.fields.news_home_description_arabic') }}*</label>
+                <textarea
+                    type="text" 
+                    rows="5"
+                    id="news_home_description_arabic" 
+                    name="news_home_description_arabic" 
+                    class="form-control text-right"
+                    dir="rtl" 
+                    required
+                >{{ old('news_home_description_arabic', isset($news) ? $news->news_home_description_arabic : '') }}</textarea>
+                @if($errors->has('news_home_description_arabic'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('news_home_description_arabic') }}
+                    </em>
+                @endif
+                <p class="helper-block">
+                    {{ trans('cruds.latest_news.fields.news_home_description_arabic_helper') }}
+                </p>
+            </div>
+
+
             <!-- Single Latest News Title for Every Latest News -->
             <div class="form-group {{ $errors->has('news_single_title') ? 'has-error' : '' }}">
                 <label for="news_single_title">{{ trans('cruds.latest_news.fields.news_single_title') }}*</label>

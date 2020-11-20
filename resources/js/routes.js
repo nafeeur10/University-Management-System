@@ -73,6 +73,7 @@ import Event11 from './views/Event11.vue';
 import Event12 from './views/Event12.vue';
 import Research from './views/Research.vue';
 import News from './views/News.vue';
+import SingleNews from './views/SingleNews.vue';
 import News1 from './views/News1.vue';
 import News2 from './views/News2.vue';
 import News3 from './views/News3.vue';
@@ -722,6 +723,18 @@ export const routes = [
         meta: {
             title: "Event",
             breadCrumb: "Event"
+        },
+        props: true
+    },
+    {
+        path: "/single-news/:id",
+        name: "SingleNews",
+        component: SingleNews,
+        titulo: 'Single News',
+        menu: true,
+        meta: {
+            title: "Single News",
+            breadCrumb: "News"
         },
         props: true
     },

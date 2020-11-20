@@ -41,6 +41,14 @@
                         </th>
 
                         <th>
+                            {{ trans('cruds.latest_news.fields.news_home_description') }}
+                        </th>
+
+                        <th>
+                            {{ trans('cruds.latest_news.fields.news_home_description_arabic') }}
+                        </th>
+
+                        <th>
                             {{ trans('cruds.latest_news.fields.news_single_title') }}
                         </th>
 
@@ -79,6 +87,8 @@
                             <td>{{ $news->id }}</td>
                             <td>{{ $news->news_home_title }}</td>
                             <td>{{ $news->news_home_title_arabic }}</td>
+                            <td>{{ $news->news_home_description }}</td>
+                            <td>{{ $news->news_home_description_arabic }}</td>
                             <td>{{ $news->news_single_title }}</td>
                             <td>{{ $news->news_single_title_arabic }}</td>
                             <td>{{ $news->news_description }}</td>

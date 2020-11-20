@@ -44,4 +44,7 @@ export default {
     transition: opacity .4s;
 }
 
+.h4, h4 {
+    font-size: 18px!important;
+}
 </style>
