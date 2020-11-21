@@ -63,6 +63,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('latest_news', 'LatestNewsController');
     Route::get('/news/images/{id}', 'LatestNewsController@getImages');
     Route::post('/news/images/delete/{image_name}', 'LatestNewsController@deleteLatestNewsImage');
+
+    Route::resource('partners', 'OurPartnerController');
+    Route::get('partners/get-image/{id}', 'OurPartnerController@getPartnerImage');
+    Route::post('/partners/images/delete/{image_name}', 'OurPartnerController@deletePartnerImage');
     
     Route::get('social_contact', 'ContactController@social')->name('contact.social');
     Route::post('social_contact_store', 'ContactController@social_store')->name('contact.social-media.store');

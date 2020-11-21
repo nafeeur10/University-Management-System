@@ -29,3 +29,6 @@ Route::get('news', 'LatestNewsAPIController@index');
 Route::get('news/image/{id}', 'LatestNewsAPIController@getNewsImage');
 Route::get('news/description/{id}', 'LatestNewsAPIController@getNewsDescription');
 Route::get('news/all', 'LatestNewsAPIController@getAll');
+
+// Our Partners
+Route::get('partners', 'OurPartnerController@getAllPartner');

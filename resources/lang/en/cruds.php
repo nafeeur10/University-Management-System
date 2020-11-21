@@ -265,5 +265,17 @@ return [
             'news_date' => 'Latest News Date',
             'news_date_helper' => '',
         ]
+    ],
+    'partners' => [
+        'title' => 'Partners',
+        'fields' => [
+            'id' => 'ID',
+            'images' => 'Image',
+            'partner_name' => 'Partner Name',
+            'partner_name_helper' => '',
+            'partner_link' => 'Partner Web Link',
+            'partner_link_helper' => '',
+            'logo' => 'Logo'
+        ]
     ]
 ];

@@ -175,11 +175,18 @@
             <!-- {{-- ./sidpar --}} -->
             <!-- {{-- Our Partners --}} -->
             <div class="Partners">
-              <h1>Our Partners</h1>
-              <img src="/storage/img/p1.png" class="card-img-top" alt="..." />
-              <img src="/storage/img/p2.png" class="card-img-top" alt="..." />
-              <img src="/storage/img/p3.png" class="card-img-top" alt="..." />
-              <img src="/storage/img/p4.png" class="card-img-top" alt="..." />
+              <h1 v-if="$store.getters.getLanguage == 'eng'">Our Partners</h1>
+              <h1 class="text-right" v-else>شركاؤنا</h1>
+              <a :href="partner.partner_link"
+                  v-for="partner in ourPartnerImages" 
+                  :key="partner.id"
+                  target="_blank"
+                  class="d-block"
+              >
+                <img
+                  :src="'images/partners/' + partner.partner_image" 
+                  class="card-img-top" alt="..." />
+              </a>
             </div>
             <!-- {{-- ./Our Partners --}} -->
           </div>
@@ -362,7 +369,8 @@ export default {
       eventImages: [],
 
       latestNews: [],
-      latestNewsImages: []
+      latestNewsImages: [],
+      ourPartnerImages: [],
     }
   },
   filters: {
@@ -532,6 +540,12 @@ export default {
           });
         }
       })
+    },
+    getOurPartners() {
+      this.$http.get('/api/partners')
+      .then( (res) => {
+        this.ourPartnerImages = res.data.partners
+      })
     }
   },
   components: {
@@ -542,6 +556,7 @@ export default {
   mounted() {
     this.getSliders();
     this.getEvents();
+    this.getOurPartners();
   },
   created() {
     this.getLatestNews();
