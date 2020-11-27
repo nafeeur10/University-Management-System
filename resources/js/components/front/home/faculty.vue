@@ -17,38 +17,37 @@
                     <div class="col-sm-8">
 
                         <b-carousel
-                                id="carousel-1"
-                                v-model="slide"
-                                :interval="10000"
-                                controls
-                                indicators
-                                background="#fff"
-                                img-width="1300"
-                                img-height="480"
-                                style="text-shadow: 1px 1px 2px #333;"
-                                @sliding-start="onSlideStart"
-                                @sliding-end="onSlideEnd"
+                            id="carousel-1"
+                            v-model="slide"
+                            :interval="10000"
+                            controls
+                            indicators
+                            background="#fff"
+                            img-width="1300"
+                            img-height="480"
+                            style="text-shadow: 1px 1px 2px #333;"
+                            @sliding-start="onSlideStart"
+                            @sliding-end="onSlideEnd"
                         >
+                        <b-carousel-slide>
+                            <template v-slot:img>
+                                <div class="card-deck">
 
-                            <b-carousel-slide>
-                                <template v-slot:img>
-                                    <div class="card-deck">
-
-                                        <div v-for="(f , i) in facultyInfo " :key="i" class="card">
-                                            <img :src="'images/faculty/'+f.home_faculty_image" class="card-img-top" alt="..." />
-                                            <div class="card-body">
-                                                <router-link class="card-title" :to="f.home_faculty_link" >
-                                                    <h5 v-if="$store.getters.getLanguage == 'eng'"> {{ f.home_faculty_title }} </h5>
-                                                    <h5 v-else> {{ f.home_faculty_title_arabic }} </h5>
-                                                </router-link>
-                                                <p class="card-text text-muted" v-if="$store.getters.getLanguage == 'eng'"> {{ f.home_faculty_description }} </p>
-                                                <p class="card-text text-muted text-right" dir="rtl" v-else> {{ f.home_faculty_description_arabic }} </p>
-                                            </div>
+                                    <div v-for="(f , i) in facultyInfo " :key="i" class="card">
+                                        <img :src="'images/faculty/'+f.home_faculty_image" class="card-img-top" alt="..." />
+                                        <div class="card-body">
+                                            <router-link class="card-title" :to="{ name: 'FacultyDetails', params: { link: f.home_faculty_link } }">
+                                                <h5 v-if="$store.getters.getLanguage == 'eng'"> {{ f.home_faculty_title }} </h5>
+                                                <h5 v-else> {{ f.home_faculty_title_arabic }} </h5>
+                                            </router-link>
+                                            <p class="card-text text-muted" v-if="$store.getters.getLanguage == 'eng'"> {{ f.home_faculty_description }} </p>
+                                            <p class="card-text text-muted text-right" dir="rtl" v-else> {{ f.home_faculty_description_arabic }} </p>
                                         </div>
-
                                     </div>
-                                </template>
-                            </b-carousel-slide>
+
+                                </div>
+                            </template>
+                        </b-carousel-slide>
 
                         </b-carousel>
 

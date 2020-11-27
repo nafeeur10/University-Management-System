@@ -16,8 +16,9 @@ Route::post('/contact/form/submit', 'ContactFormController@sentMail')->name('sen
 Route::get('/sliders', 'HomeSliderController@getSliders');
 Route::get('/getnews', 'BreakingNewsController@newsList')->name('newslist');
 Route::get('/getwelcomeinfo', 'WelcomeMessageController@getwelcomeinfo')->name('welcomeinfo');
-Route::get('/getallfaculty', 'HomeFacultyController@getAllFaculty')->name('facultyinfo');
 
+Route::get('/getallfaculty', 'HomeFacultyController@getAllFaculty')->name('facultyinfo');
+Route::get('/get-faculty-details/{link}', 'HomeFacultyController@getFacultyDetails');
 // Event
 Route::get('events', 'HomeEventAPIController@index');
 Route::get('event/image/{id}', 'HomeEventAPIController@getEventImage');
@@ -32,3 +33,5 @@ Route::get('news/all', 'LatestNewsAPIController@getAll');
 
 // Our Partners
 Route::get('partners', 'OurPartnerController@getAllPartner');
+
+// 

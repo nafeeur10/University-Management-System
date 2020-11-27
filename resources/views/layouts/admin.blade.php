@@ -38,6 +38,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/components.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/dark-layout.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/semi-dark-layout.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/summernote-bs4.min.css') }}">
 
     <!-- Dropzone CSS -->
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -312,6 +313,7 @@
     <script src="{{ asset('app-assets/js/core/app-menu.js') }}"></script>
     <script src="{{ asset('app-assets/js/core/app.js') }}"></script>
     <script src="{{ asset('app-assets/js/scripts/components.js') }}"></script>
+    <script src="{{ asset('app-assets/js/summernote-bs4.min.js') }}"></script>
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->

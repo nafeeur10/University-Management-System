@@ -16,10 +16,10 @@
 <script>
 import Breadcrumb from '../components/front/breadcrumb.vue';
 import Carousel from '../components/front/carousel.vue';
-import Description from '../components/front/FacultyOral/description.vue';
-import Tabs from '../components/front/FacultyOral/tabs.vue';
+import Description from '../components/front/FacultyDetails/description.vue';
+import Tabs from '../components/front/FacultyDetails/tabs.vue';
 import Dote from '../components/front/doteShape.vue';
-import Departments from '../components/front/FacultyOral/departments.vue';
+import Departments from '../components/front/FacultyDetails/departments.vue';
 
 export default {
     data() {

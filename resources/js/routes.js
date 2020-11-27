@@ -80,6 +80,7 @@ import News3 from './views/News3.vue';
 import News4 from './views/News4.vue';
 import News5 from './views/News5.vue';
 import News6 from './views/News6.vue';
+import FacultyDetails from './views/FacultyDetails.vue';
 
 export const routes = [
     
@@ -735,6 +736,18 @@ export const routes = [
         meta: {
             title: "Single News",
             breadCrumb: "News"
+        },
+        props: true
+    },
+    {
+        path: "/faculty-details/:link",
+        name: "FacultyDetails",
+        component: FacultyDetails,
+        titulo: 'Faculty Details',
+        menu: true,
+        meta: {
+            title: "Faculty Details",
+            breadCrumb: "Faculty Details"
         },
         props: true
     },
