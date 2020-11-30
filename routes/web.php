@@ -56,6 +56,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('contact', 'ContactController');
     Route::resource('welcomemessage', 'WelcomeMessageController');
     Route::resource('faculty', 'HomeFacultyController');
+    Route::resource('faculty_tabs', 'FacultyTabsController');
     Route::resource('events', 'HomeEventsController');
     Route::get('/event/images/{id}', 'HomeEventsController@getImages');
     Route::post('/event/images/delete/{image_name}', 'HomeEventsController@deleteEventImage');

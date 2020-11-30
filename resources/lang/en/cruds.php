@@ -228,6 +228,21 @@ return [
             'faculty_details_title_helper' => '',
             'faculty_details_title_arabic' => 'Faculty Details Title (Arabic)',
             'faculty_details_title_arabic_helper' => '',
+        ],
+        'tabs' => [
+            'title' => 'Faculty Tabs',
+            'fields' => [
+                'tab_image' => 'Tab Image',
+                'faculty_selection' => 'Select Faculty',
+                'faculty_tab_title' => 'Tab Title',
+                'faculty_tab_title_helper' => '',
+                'faculty_tab_title_arabic' => 'Tab Title (Arabic)',
+                'faculty_tab_title_arabic_helper' => '',
+                'faculty_tab_description' => 'Faculty Description',
+                'faculty_tab_description_helper' => '',
+                'faculty_tab_description_arabic' => 'Faculty Description (Arabic)',
+                'faculty_tab_description_arabic_helper' => '',
+            ]
         ]
     ],
     'event' => [

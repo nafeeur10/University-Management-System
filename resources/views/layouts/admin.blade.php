@@ -44,6 +44,8 @@
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link type="text/css" rel="stylesheet" href="{{ asset('css/image-uploader.min.css') }}">
 
+    <link href="https://cdn.quilljs.com/1.1.6/quill.snow.css" rel="stylesheet">
+
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/colors/palette-gradient.css') }}">
@@ -324,6 +326,9 @@
     <script src="{{ asset('app-assets/js/scripts/extensions/sliderdropzone.js ') }}"></script> -->
     <!-- <script src="{{ asset('app-assets/js/scripts/pages/dashboard-analytics.js') }}"></script> -->
     <!-- END: Page JS-->
+
+    <!-- <script src="{{ asset('js/app.js') }}"></script> -->
+    <script src="https://cdn.quilljs.com/1.1.6/quill.js"></script>
 
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/image-uploader.js') }}"></script>

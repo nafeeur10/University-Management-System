@@ -7,13 +7,17 @@
 @endif
 @can('editor_add_update')
     <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.faculty.create") }}">
+        <div class="d-flex py-2">
+            <a class="btn btn-success mx-2" href="{{ route("admin.faculty.create") }}">
                 {{ trans('global.add') }} {{ trans('cruds.faculty.title') }}
+            </a>
+            <a class="btn btn-primary" href="{{ route('admin.faculty_tabs.create') }}">
+                {{ trans('global.add') }} {{ trans('cruds.faculty.tabs.title') }}
             </a>
         </div>
     </div>
 @endcan
+
 <div class="card">
     <div class="card-header">
         {{ trans('cruds.faculty.title') }} {{ trans('global.list') }}
