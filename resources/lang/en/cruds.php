@@ -308,5 +308,21 @@ return [
             'partner_link_helper' => '',
             'logo' => 'Logo'
         ]
+    ],
+    'campuslife' => [
+        'title' => 'Campus Life',
+        'fields' => [
+            'id' => 'ID',
+            'campus_life_icon' => 'Campus Life Icon',
+            'campus_life_icon_helper' => '',
+            'campus_life_title' => 'Campus Life Title',
+            'campus_life_title_helper' => '',
+            'campus_life_title_arabic' => 'Campus Life Title (Arabic)',
+            'campus_life_title_arabic_helper' => '',
+            'campus_life_description' => 'Campus Life Description for Home',
+            'campus_life_description_helper' => '',
+            'campus_life_description_arabic' => 'Campus Life Description for Home (Arabic)',
+            'campus_life_description_arabic_helper' => '',
+        ]
     ]
 ];

@@ -76,21 +76,28 @@
               <h3>CAMPUS LIFE</h3>
               <!-- {{-- Cafeteria --}} -->
               <hr style="margin: 40px 0; border-color: #fff;" />
-              <div class="row">
+              <div class="row" v-for="campus in campusLife" :key="campus.id">
                 <div class="col-sm-2">
                   <img
-                    src="/storage/img/cafeteris-icon.png"
+                    :src="'images/campuslife/' + campus.campus_life_icon"
                     alt="cafeteris-icon"
-                    title="cafeteris-icon"
+                    :title="campus.campus_life_title"
                     width="35"
                     height="27"
                   />
                 </div>
                 <div class="col-sm-10">
-                  <h3 class="title white">Cafeteria</h3>
+                  <h3 class="title white" v-if="$store.getters.getLanguage == 'eng'">{{ campus.campus_life_title }}</h3>
+                  <h3 class="title white" v-else>{{ campus.campus_life_title_arabic }}</h3>
                   <div
                     class="desc white"
-                  >The university has 5 cafeterias that serve high-quality food.<br><br></div>
+                    v-if="$store.getters.getLanguage == 'eng'"
+                  >{{ campus.campus_life_home_description }}<br><br></div>
+
+                  <div
+                    class="desc white"
+                    v-else
+                  >{{ campus.campus_life_home_description_arabic }}<br><br></div>
                   <router-link
                           to="/Campus"
                           class="more white"
@@ -100,75 +107,6 @@
                     VIEW MORE
                     <i class="fa fa-arrow-right"></i>
                   </router-link>
-                </div>
-              </div>
-              <!-- {{-- SPORTS --}} -->
-              <hr style="margin: 40px 0; border-color: #fff;" />
-              <div class="row">
-                <div class="col-sm-2">
-                  <img
-                    src="/storage/img/ball-white1.png"
-                    alt="cafeteris-icon"
-                    title="cafeteris-icon"
-                    width="35"
-                    height="27"
-                  />
-                </div>
-                <div class="col-sm-10">
-                  <h3 class="title white">SPORTS</h3>
-                  <div
-                    class="desc white"
-                  >Our belief that a healthy mind lies in a healthy body.<br><br></div>
-                  <router-link
-                          to="/Campus"
-                          class="more white"
-                          style="display: block;"
-                          exact
-                          title="Campus">
-                    VIEW MORE
-                    <i class="fa fa-arrow-right"></i>
-                  </router-link>
-                </div>
-              </div>
-              <!-- {{-- SPORTS --}} -->
-              <hr style="margin: 40px 0; border-color: #fff;" />
-              <div class="row">
-                <div class="col-sm-2">
-                  <img
-                    src="/storage/img/acc-icon.png"
-                    alt="cafeteris-icon"
-                    title="cafeteris-icon"
-                    width="35"
-                    height="27"
-                  />
-                </div>
-                <div class="col-sm-10">
-                  <h3 class="title white">Accomodation</h3>
-                  <div
-                    class="desc white"
-                  >The Egyptian Russian University announces accepting application for housing.<br><br></div>
-                  <router-link
-                          to="/Campus"
-                          class="more white"
-                          style="display: block;"
-                          exact
-                          title="Campus">
-                    VIEW MORE
-                    <i class="fa fa-arrow-right"></i>
-                  </router-link>
-                  <!-- <router-link
-                          to="/Apply-now"
-                          class="btn btn-lg btn-danger"
-                          style="margin-top: 50px; background:#c20000"
-                          exact
-                          title="Apply Now">
-                    Apply Now
-                  </router-link> -->
-                  <a 
-                  style="margin-top: 50px; background:#c20000"
-                  class="btn btn-lg btn-danger"
-                  href="https://admission.eru.edu.eg/UI/Adm/AdmMod_ApplicantRegCheck.aspx"
-                  target="_blank">Apply Now</a>
                 </div>
               </div>
             </div>
@@ -377,7 +315,8 @@ export default {
       ourPartnerImages: [],
 
       tickerLocation: 0,
-      partnersInitialValue: []
+      partnersInitialValue: [],
+      campusLife: []
     }
   },
   filters: {
@@ -560,6 +499,12 @@ export default {
     updateTicker: function() {
       var removed = this.partnersInitialValue.pop();
       this.partnersInitialValue.unshift(removed);
+    },
+    getCampusLife() {
+      this.$http.get('/api/getcampuslife')
+      .then( (res) => {
+        this.campusLife = res.data.campuslife
+      })
     }
   },
   components: {
@@ -572,6 +517,7 @@ export default {
     this.getEvents();
     this.getOurPartners();
     setInterval(this.updateTicker, 5000);
+    this.getCampusLife();
   },
   created() {
     this.getLatestNews();

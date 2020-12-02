@@ -60,6 +60,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('events', 'HomeEventsController');
     Route::get('/event/images/{id}', 'HomeEventsController@getImages');
     Route::post('/event/images/delete/{image_name}', 'HomeEventsController@deleteEventImage');
+
+    Route::resource('campuslife', 'CampusLifeController');
     
     Route::resource('latest_news', 'LatestNewsController');
     Route::get('/news/images/{id}', 'LatestNewsController@getImages');
