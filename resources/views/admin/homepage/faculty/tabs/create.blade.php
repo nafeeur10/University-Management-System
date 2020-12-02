@@ -13,7 +13,7 @@
             method="POST" 
             enctype="multipart/form-data" -->
 
-        <form>
+        <form id="facultyTabForm" enctype="multipart/form-data"> 
             <!-- Select Faculty -->
             <div class="form-group">
                 <label for="faculty_selection">{{ trans('cruds.faculty.tabs.fields.faculty_selection') }}*</label>
@@ -26,9 +26,30 @@
             </div>
 
             <div class="form-group">
+                <label for="faculty_tab_image_preview">Faculty Tabs Image Preview: </label>
+                <img 
+                    id="faculty_tab_image_preview" 
+                    class="d-block border-0 mt-1"  
+                    style="height:150px; width:150px;" 
+                    src="{{ asset('images/demo.jpg') }}">
+            </div>
+
+            <div class="form-group">
+                <label for="faculty_tab_image">Upload Faculty Tabs Image: </label>
+                <input 
+                    type="file" 
+                    name="faculty_tab_image" 
+                    id="faculty_tab_image" 
+                    class="form-control"
+                    accept="image/jpeg, image/png"
+                    onchange="document.getElementById('faculty_tab_image_preview').src = window.URL.createObjectURL(this.files[0])"
+                >
+            </div>
+
+            <!-- <div class="form-group">
                 <label for="faculty-tab-image-preview">{{ trans('global.upload') }} {{ trans('cruds.faculty.tabs.fields.tab_image') }}</label>
                 <div class="input-image-faculty-tab"></div>
-            </div>
+            </div> -->
 
             <!-- Faculty Tab Title -->
             <div class="form-group {{ $errors->has('faculty_tab_title') ? 'has-error' : '' }}">
@@ -117,16 +138,8 @@
 @section('scripts')
 @parent
 <script type="text/javascript">
-    let preloaded = [];
 
-    $('.input-image-faculty-tab').imageUploader({
-        preloaded: preloaded,
-        imagesInputName: 'faculty_tab_image',
-        preloadedInputName: 'old',
-        label: 'Drag & Drop files here or click to browse'
-    }); 
-
-    var quill = new Quill('#faculty_tab_description', {
+    var facultyTabDes = new Quill('#faculty_tab_description', {
         theme: 'snow'
     });
 
@@ -137,28 +150,44 @@
     facultyTabDesArab.format('direction', 'rtl');
     facultyTabDesArab.format('align', 'right');
 
-
-
     var form = document.querySelector('form');
-    form.onsubmit = function(e) {
+    
+    
+    $("#facultyTabForm").on('submit', function(e) {
         e.preventDefault();
+
+        var formData = new FormData(this);
        
-        var about = document.querySelector('input[name=faculty_tab_description]');
-        about.value = JSON.stringify(quill.getContents());
+        var facultyTabDescription = document.querySelector('input[name=faculty_tab_description]');
+        facultyTabDescription.value = JSON.stringify(facultyTabDes.getContents());
 
         var ftda = document.querySelector('input[name=faculty_tab_description_arabic]');
         ftda.value = JSON.stringify(facultyTabDesArab.getContents());
 
-        var image; 
-        $('input[name^="faculty_tab_image"]').each(function() {
-            image = ($(this).val());
-        });
 
-        var inputImage = image.replace("C:\\fakepath\\", "");
-        
-        var data = $(form).serializeArray();
-        data.push({ name: "faculty_tab_image", value: inputImage });
+        formData.append('faculty_tab_description_append', facultyTabDescription.value);
+        formData.append('faculty_tab_description_arabic_append', ftda.value);
 
-    };
+        $.ajax({
+            url: "{{ route('admin.faculty_tabs.store')}}",
+            type: 'POST',
+            data: formData,
+            dataType:'JSON',
+            contentType: false,
+            processData: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                toastr.success(response.success);
+                window.location.href = "/admin/faculty";
+                // console.log("Success: ",response.success);
+            },
+            error: function(error) {
+                console.log("Error: ", error);
+            }
+        })
+
+    });
 </script>
 @endsection

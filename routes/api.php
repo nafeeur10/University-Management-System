@@ -19,6 +19,7 @@ Route::get('/getwelcomeinfo', 'WelcomeMessageController@getwelcomeinfo')->name('
 
 Route::get('/getallfaculty', 'HomeFacultyController@getAllFaculty')->name('facultyinfo');
 Route::get('/get-faculty-details/{link}', 'HomeFacultyController@getFacultyDetails');
+Route::get('/get-faculty-tab/{faculty}', 'FacultyTabsController@getTabInfo');
 // Event
 Route::get('events', 'HomeEventAPIController@index');
 Route::get('event/image/{id}', 'HomeEventAPIController@getEventImage');

@@ -2,42 +2,28 @@
   <div class>
     <div class="row">
       <div class="col-lg-3 no-padding">
-        <img :src="url" class="img-fluid" alt="Responsive image" />
+        <img :src="'/images/faculty/tab/' + imgUrl" class="img-fluid" alt="Responsive image" />
       </div>
       <div class="col-lg-3 no-padding tabs">
         <ul>
           <li
             @click="tabClicl(i)"
             :class="{tabHolder: i.id == tabID }"
-            v-for="(i, b) in tabs"
+            v-for="(i, b) in facultyTabDetails"
             :key="b"
           >
-            <i :class="i.icon" v-show="i.id == tabID" aria-hidden="true"></i>
+            <!-- <i :class="i.icon" v-show="i.id == tabID" aria-hidden="true"></i> -->
             <div :class="{btnitem: i.id == tabID }">
-              <h6 :class="{Clicked: i.id == tabID }">{{ i.title }}</h6>
+              <h6 :class="{Clicked: i.id == tabID }">{{ i.faculty_tab_title }}</h6>
             </div>
           </li>
         </ul>
       </div>
       <div class="col-lg-6 no-padding">
-        <div class="cont" v-if="tabID == 1">
-          <strong>Dear Students,</strong><br><br>
-                First of all, I would like to congratulate each one of you on your outstanding success and your choice to study at the Faculty of Oral & Dental Medicine.
-                You are now embarking a brand new and fresh start, your very first steps of the university stage, in other words, you are about to lay the foundation of you future career. Consequently, I encourage you to maintain your supremacy and your magnificent performance in every step of the way in order to achieve the highest educational and professional levels.
-                The study of Oral & Dental Medicine combines between science and art, it also integrate theoretical studies and manual skills. You will always get the support and assistance needed to accomplish the educational and practical required levels as we have the most recent facilities at the laboratories, clinics and lecture halls to keep both, the theoretical and practical educational process on track.
-                We are keen to adhere to ethical standards and punctuality of social relations and I believe you will follow the same path.
-                Eventually, I would like to welcome all new students and to wish you a happy, fruitful and successful new academic year.<br><br>
-                Dean of the Faculty of Oral and Dental Medicine <br>
-                <strong>Prof, Khaled Tawfik</strong>
-
-        </div>
-        <div class="cont" v-if="tabID == 2">
-          <h4>Our Vision</h4>
-          Reaching by the technical and scientific skills of the graduate to the international standards in the fields of education and scientific research with introducing distinguished therapeutic services in the dental fields.
-        </div>
-        <div class="cont" v-if="tabID == 3">
-          <h4>Our Mission</h4>
-          Preparing graduates to be able to compete in the national and regional market through updated educational and technical manners in teaching and scientific research in the dental field with commitment toward community responsibility.
+        <div v-for="tab in facultyTabDetails" :key="tab.id">
+          <div class="cont" v-if="tabID == tab.id">
+            {{ tab.faculty_tab_description }}
+          </div>
         </div>
       </div>
     </div>
@@ -46,10 +32,11 @@
 
 <script>
 export default {
+  props: ['facultyTabDetails', 'imgUrl'],
   data() {
     return {
       tabID: 1,
-      url: "/storage/img/tab-dean-oral.jpg",
+      url: null,
       tabs: [
         {
           id: 1,
@@ -72,12 +59,20 @@ export default {
       ]
     };
   },
-  computed: {},
+  computed: {
+    
+  },
   methods: {
     tabClicl(b) {
       this.tabID = b.id;
-      this.url = b.img;
+      this.url = b.faculty_tab_image;
+    },
+    firstUrlForImage() {
+      this.url = this.facultyTabDetails[0].faculty_tab_image
     }
+  },
+  mounted() {
+    this.firstUrlForImage();
   }
 };
 </script>

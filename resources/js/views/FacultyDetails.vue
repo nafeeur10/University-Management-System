@@ -4,7 +4,7 @@
     <breadcrumb :title="facultyDetails.home_faculty_title" />
     <description :facultyDetails="facultyDetails" />
     <dote />
-    <tabs />
+    <tabs :imgUrl="facultyTabDetails[0].faculty_tab_image" :facultyTabDetails="facultyTabDetails" />
     <dote style="margin-top: 50px;" />
     <departments style="margin-bottom: 70px;" />
     <dote style="margin-top: 50px;" />
@@ -32,6 +32,7 @@ export default {
           ],
           facultyDetails: null,
           facultyBannerImages: [],
+          facultyTabDetails: []
       }
   },
   components: {
@@ -52,10 +53,20 @@ export default {
         console.log("Error: ",res);
         alert("Problem in Faculty");
       })
+    },
+    getTabDetails() {
+      this.$http.get('/api/get-faculty-tab/' + this.link)
+      .then( (res) => {
+        this.facultyTabDetails = res.data.tabInfo
+      }).catch( (res) => {
+        console.log("Error: ",res);
+        alert("Problem in Faculty");
+      })
     }
   },
   created() {
     this.getFacultyDetails();
+    this.getTabDetails();
   }
 };
 </script>

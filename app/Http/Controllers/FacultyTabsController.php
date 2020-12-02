@@ -22,22 +22,11 @@ class FacultyTabsController extends Controller
 
     public function store(Request $request)
     {
-
-        dd($request->all());
-
-        $request->validate([
-            'faculty_selection' => 'required',
-            'faculty_tab_image' => 'required',
-            'faculty_tab_title' => 'required',
-            'faculty_tab_title_arabic' => 'required',
-            'faculty_tab_description' => 'required',
-            'faculty_tab_description_arabic' => 'required',
-        ]);
-
         $facultyTab = new FacultyTabs();
         $facultyTab->faculty_id = $request->faculty_selection;
 
-        if($files = $request->file('faculty_tab_image')) {
+        if($files = $request->file('faculty_tab_image')) 
+        {
             $facultyTabImage = 'FacultyTab'.time().'.'.$files->getClientOriginalName();
             $files->move('images/faculty/tab', $facultyTabImage);
             $facultyTab->faculty_tab_image = $facultyTabImage;
@@ -45,57 +34,41 @@ class FacultyTabsController extends Controller
 
         $facultyTab->faculty_tab_title = $request->faculty_tab_title;
         $facultyTab->faculty_tab_title_arabic = $request->faculty_tab_title_arabic;
-        $facultyTab->faculty_tab_description = $request->faculty_tab_description;
-        $facultyTab->faculty_tab_description_arabic = $request->faculty_tab_description_arabic;
+        $facultyTab->faculty_tab_description = $request->faculty_tab_description_append;
+        $facultyTab->faculty_tab_description_arabic = $request->faculty_tab_description_arabic_append;
 
         $facultyTab->save();
-        return redirect()
-            ->route('admin.faculty_tabs.index')
-            ->with('success', 'Faculty Tab Information added Successfully!');
+        return response()->json([
+            'success' => 'Faculty Tab Information Added Successfully'
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\FacultyTabs  $facultyTabs
-     * @return \Illuminate\Http\Response
-     */
     public function show(FacultyTabs $facultyTabs)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\FacultyTabs  $facultyTabs
-     * @return \Illuminate\Http\Response
-     */
     public function edit(FacultyTabs $facultyTabs)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\FacultyTabs  $facultyTabs
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, FacultyTabs $facultyTabs)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\FacultyTabs  $facultyTabs
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(FacultyTabs $facultyTabs)
     {
         //
+    }
+
+    public function getTabInfo($faculty) {
+        $id = HomeFaculty::where('home_faculty_link', $faculty)->first()->id;
+        $tabInformation = FacultyTabs::where('faculty_id', $id)->get();
+        return response()->json([
+            'tabInfo' => $tabInformation
+        ]);
     }
 }
