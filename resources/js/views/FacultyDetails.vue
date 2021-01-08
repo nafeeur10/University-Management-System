@@ -1,12 +1,14 @@
 <template>
   <div>
-    <carousel :link="link" :text="facultyDetails.home_faculty_title" :images="facultyBannerImages" />
-    <breadcrumb :title="facultyDetails.home_faculty_title" />
+    <carousel v-if="$store.getters.getLanguage == 'eng'" :link="link" :text="facultyDetails.home_faculty_title" :images="facultyBannerImages" />
+    <carousel v-else :link="link" :text="facultyDetails.home_faculty_title_arabic" :images="facultyBannerImages" />
+    <breadcrumb v-if="$store.getters.getLanguage == 'eng'" :title="facultyDetails.home_faculty_title" />
+    <breadcrumb v-else :title="facultyDetails.home_faculty_title_arabic" />
     <description :facultyDetails="facultyDetails" />
     <dote />
     <tabs :imgUrl="facultyTabDetails[0].faculty_tab_image" :facultyTabDetails="facultyTabDetails" />
     <dote style="margin-top: 50px;" />
-    <departments style="margin-bottom: 70px;" />
+    <departments :id="facultyID" style="margin-bottom: 70px;" />
     <dote style="margin-top: 50px;" />
     <courses style="margin-bottom: 70px;" />
   </div>
@@ -32,7 +34,8 @@ export default {
           ],
           facultyDetails: null,
           facultyBannerImages: [],
-          facultyTabDetails: []
+          facultyTabDetails: [],
+          facultyID: null
       }
   },
   components: {
@@ -48,6 +51,7 @@ export default {
       this.$http.get('/api/get-faculty-details/' + this.link)
       .then( (res) => {
         this.facultyDetails = res.data.facultyDetails,
+        this.facultyID = res.data.facultyDetails.id,
         this.facultyBannerImages = res.data.bannerImages
       }).catch( (res) => {
         console.log("Error: ",res);

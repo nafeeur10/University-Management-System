@@ -243,6 +243,49 @@ return [
                 'faculty_tab_description_arabic' => 'Faculty Description (Arabic)',
                 'faculty_tab_description_arabic_helper' => '',
             ]
+            ],
+        'dept' => [
+            'title' => 'Faculty Departments',
+            'fields' => [
+                'faculty_selection' => 'Select Faculty',
+                'faculty' => 'Faculty Name',
+                'image_on_faculty_preview' => 'Preview Department Image on Faculty',
+                'upload_dept_image_on_faculty' => 'Upload Department Image on Faculty',
+                'faculty_dept_title' => 'Department Name',
+                'faculty_dept_title_helper' => '',
+                'faculty_dept_title_arabic' => 'Department Name (Arabic)',
+                'faculty_dept_title_arabic_helper' => '',
+                'faculty_dept_short_description' => 'Department Short Description (For Faculty Page)',
+                'faculty_dept_short_description_helper' => '',
+                'faculty_dept_short_description_arabic' => 'Department Short Description In Arabic (For Faculty Page)',
+                'faculty_dept_short_description_arabic_helper' => '',
+                'dept_image_upload' => 'Upload Department Image',
+                'dept_image_preview' => 'Preview Department Image',
+                'faculty_dept_description' => 'Department Description',
+                'faculty_dept_description_helper' => '',
+                'faculty_dept_description_arabic' => 'Department Description (Arabic)',
+                'faculty_dept_description_arabic_helper' => '',
+                'dept_url' => 'Department Link'
+            ]
+        ]
+    ],
+    'staff' => [
+        'title' => 'Staff',
+        'fields' => [
+            'dept_name_show' => 'Department Name',
+            'dept_name' => 'Select Department',
+            'staff_name' => 'Staff Name',
+            'staff_name_helper' => '',
+            'staff_name_arabic' => 'Staff Name (Arabic)',
+            'staff_name_arabic_helper' => '',
+            'staff_designation' => 'Designation',
+            'staff_designation_helper' => '',
+            'staff_designation_arabic' => 'Designation (Arabic)',
+            'staff_designation_arabic_helper' => '',
+            'upload_staff_resume' => 'Upload Resume',
+            'upload_staff_resume_helper' => '',
+            'preview_staff_resume' => 'Staff Resume Preview',
+            'staff_resume' => 'Staff Resume'
         ]
     ],
     'event' => [

@@ -6,34 +6,38 @@
                     <div class="col-sm-12 no-padding">
 
                         <b-carousel
-                                id="carousel-1"
-                                v-model="slide"
-                                :interval="10000"
-                                indicators
-                                background="#fff"
-                                img-width="1300"
-                                img-height="480"
-                                style="text-shadow: 1px 1px 2px #333;"
-                                @sliding-start="onSlideStart"
-                                @sliding-end="onSlideEnd"
+                            id="carousel-1"
+                            v-model="slide"
+                            :interval="10000"
+                            indicators
+                            background="#fff"
+                            img-width="1300"
+                            img-height="480"
+                            style="text-shadow: 1px 1px 2px #333;"
+                            @sliding-start="onSlideStart"
+                            @sliding-end="onSlideEnd"
                         >
 
                             <b-carousel-slide>
                                 <template v-slot:img>
-                                    <div class="card-deck">
+                                <div class="row">
 
-                                        <div v-for="(f , i) in slider1 " :key="i" class="card">
-                                            <img :src="f.img" class="card-img-top" alt="..." />
+                                    <div v-for="(f , i) in facultyInfo" :key="i" class="card col-md-3">
+                                        <router-link class="card-title" :to="{ name: 'FacultyDetails', params: { link: f.home_faculty_link } }">
+                                            <img :src="'images/faculty/'+f.home_faculty_image" class="card-img-top" alt="..." />
                                             <div class="card-body">
-                                                <router-link class="card-title" :to="f.to" >
-                                                    <h5 > {{ f.title }} </h5>
-                                                </router-link>
-                                                <p class="card-text text-muted"> {{ f.desc }} </p>
+                                                
+                                                    <h5 v-if="$store.getters.getLanguage == 'eng'"> {{ f.home_faculty_title }} </h5>
+                                                    <h5 v-else> {{ f.home_faculty_title_arabic }} </h5>
+                                                
+                                                <p class="card-text text-muted" v-if="$store.getters.getLanguage == 'eng'"> {{ f.home_faculty_description }} </p>
+                                                <p class="card-text text-muted text-right" dir="rtl" v-else> {{ f.home_faculty_description_arabic }} </p>
                                             </div>
-                                        </div>
-
+                                        </router-link>
                                     </div>
-                                </template>
+
+                                </div>
+                            </template>
                             </b-carousel-slide>
 
                         </b-carousel>
@@ -118,7 +122,8 @@
                         img: "/storage/img/department_image6.jpg",
                         show: 0
                     }
-                ]
+                ],
+                facultyInfo: []
             };
         },
         methods: {
@@ -127,7 +132,18 @@
             },
             onSlideEnd(slide) {
                 this.sliding = false;
+            },
+            getAllFaculty() {
+                this.$http.get('api/getallfaculty')
+                .then( (res) => {
+                    this.facultyInfo = res.data.faculties
+                }).catch( (res) => {
+                    alert("Something Wrong in Faculty");
+                })
             }
+        },
+        mounted() {
+            this.getAllFaculty();
         }
     };
 </script>

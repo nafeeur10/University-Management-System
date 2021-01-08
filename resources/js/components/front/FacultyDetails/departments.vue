@@ -1,9 +1,11 @@
 <template>
   <div class="container service">
-    <h1>SCIENTIFIC DEPARTMENTS</h1>
-    <h6>
+    <h1 v-if="$store.getters.getLanguage == 'eng'">DEPARTMENTS</h1>
+    <h1 v-else>الأقسام العلمية</h1>
+    <h6 v-if="$store.getters.getLanguage == 'eng'">
         The first and only Russian university in the middle east. It is indeed an exciting time to be a part of this dynamic society.
     </h6>
+    <h6 v-else>الجامعة الروسية الأولى والوحيدة في الشرق الأوسط. إنه حقًا وقت مثير أن تكون جزءًا من هذا المجتمع الديناميكي</h6>
 
     <b-carousel
       id="carousel-1"
@@ -22,17 +24,19 @@
         <template v-slot:img>
           <b-row cols="4">
             <b-col
-              v-for="(i,b) in slider1"
+              v-for="(i,b) in deptSlider"
               :key="b"
               @mouseover="i.show = 1"
               @mouseleave="i.show = 0"
               class=" p-3"
             >
-              <img class="w-100 h-100" :src="i.img" alt="image slot" />
+              <img class="w-100 h-100" :src="'/images/faculty/dept/' + i.	img" alt="image slot" />
               <div :class="i.show ? 'lm' : 'hover'">
-                <h5>{{ i.title }}</h5>
-                <p v-show="i.show " v-html="i.desc" ></p>
-                <router-link :to="i.to" class="white" style="color:#fff" v-show="i.show ">READ MORE</router-link>
+                <h5 v-if="$store.getters.getLanguage == 'eng'">{{ i.title }}</h5>
+                <h5 v-else>{{ i.title_arabic }}</h5>
+                <p v-show="i.show" v-if="$store.getters.getLanguage == 'eng'">{{ i.desc }}</p>
+                <p v-show="i.show" v-else>{{ i.desc_arabic }}</p>
+                <router-link :to="{ name: 'DepartmenBasic', params: { id: i.link } }" class="white" style="color:#fff" v-show="i.show">READ MORE</router-link>
               </div>
             </b-col>
           </b-row>
@@ -44,77 +48,13 @@
 
 <script>
 export default {
+  props: ['id'],
   data() {
     return {
       slide: 0,
       sliding: null,
-      slider1: [
-        {
-          id: 1,
-          title: "Oral & Dental Biology & Pathology Department",
-            to: '/Oral_Dental_Biology_Pathology_Department',
-          desc:
-            "",
-          img: "/storage/img/Pathology-img1.jpg",
-          show: 0
-        },
-        {
-          id: 2,
-          title: "Prosthodontics Department",
-            to: '/Prosthodontics_Department',
-          desc:
-            "",
-          img: "/storage/img/Prosthodontics-img1.jpg",
-          show: 0
-        },
-        {
-            id: 3,
-            title: "Conservative Dentistry Department",
-            to: '/Conservative_Dentistry_Department',
-            desc:
-                "",
-            img: "/storage/img/Conservative-img1.jpg",
-            show: 0
-        },
-        {
-            id: 4,
-            title: "Oral & Maxillofacial Surgery Department",
-            to: '/Oral_Maxillofacial_Surgery_Department',
-            desc:
-                "",
-            img: "/storage/img/Oral-img1.jpg",
-            show: 0
-        },
-        {
-            id: 5,
-            title: "Orthodontics and Pediatric Department",
-            to: '/Orthodontics_and_Pediatric_Department',
-            desc:
-                "",
-            img: "/storage/img/Orthodontics-img1.jpg",
-            show: 0
-        },
-        {
-            id: 6,
-            title: "Oral medicine, Diagnosis, Radiology, and Periodontology Department",
-            to: '/Periodontology_Department',
-            desc:
-                "",
-            img: "/storage/img/Diagnosis-img1.jpg",
-            show: 0
-        },
-        {
-            id: 7,
-            title: "Basic & Medical Sciences Department",
-            to: '/Basic_Medical_Sciences_Department',
-            desc:
-                "",
-            img: "/storage/img/Basic-img1.jpg",
-            show: 0
-        },
-
-      ],
-
+      allDepts: [],
+      deptSlider: [],
     };
   },
   methods: {
@@ -123,7 +63,41 @@ export default {
     },
     onSlideEnd(slide) {
       this.sliding = false;
+    },
+    getDept() {
+        this.$http.get('/api/getalldepts/' + this.id)
+        .then( (res) => {
+            this.allDepts = res.data.alldepts;
+            this.allDepts.forEach( (elem) => {
+              let obj = {
+                id: elem.id,
+                title: elem.dept_name,
+                title_arabic: elem.dept_name_arabic,
+                to: elem.dept_url,
+                desc: elem.dept_short_description,
+                desc_arabic: elem.dept_short_description,
+                img: elem.dept_faculty_image,
+                link: elem.dept_url,
+                show: 0
+              }
+              this.deptSlider.push(obj);
+              elem.show = 0
+            });
+            console.log("YES::::", this.allDepts);
+        }).catch( (err) => {
+            alert("Something wrong in Welcome Info. Please Check.");
+        })
+    },
+    changeShow(b, i) {
+      
+      i.show = 1
+
+      console.log(b.show + ' ' + i.show);
+
     }
+  },
+  created() {
+    this.getDept();
   }
 };
 </script>

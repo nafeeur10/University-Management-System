@@ -46,7 +46,7 @@ export default {
     carousel: Carousel,
     dote: DoteShape,
     staff: Staff,
-      Business: Business
+    Business: Business
   }
 };
 </script>

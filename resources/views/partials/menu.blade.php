@@ -63,6 +63,18 @@
                 <span class="menu-title" data-i18n="Email">{{ trans('cruds.faculty.title') }}</span>
             </a>
         </li>
+        <li class="nav-item {{ request()->is('admin/department') || request()->is('admin/department/*') ? 'active' : '' }}">
+            <a href="{{ route("admin.department.index") }}">
+                <i class="feather icon-mail"></i>
+                <span class="menu-title" data-i18n="Email">{{ trans('cruds.faculty.dept.title') }}</span>
+            </a>
+        </li>
+        <li class="nav-item {{ request()->is('admin/staff') || request()->is('admin/staff/*') ? 'active' : '' }}">
+            <a href="{{ route("admin.staff.index") }}">
+                <i class="feather icon-mail"></i>
+                <span class="menu-title" data-i18n="Email">{{ trans('cruds.staff.title') }}</span>
+            </a>
+        </li>
         <li class="nav-item {{ request()->is('admin/events') || request()->is('admin/events/*') ? 'active' : '' }}">
             <a href="{{ route("admin.events.index") }}">
                 <i class="feather icon-mail"></i>

@@ -3,14 +3,13 @@
     <carousel :link="link" text="Faculties" />
     <breadcrumb />
     <faculty />
-    <!--<dote />-->
   </div>
 </template>
 
 
 <script>
 import Breadcrumb from '../components/front/breadcrumb.vue';
-import Carousel from '../components/front/carousel.vue';
+import Carousel from '../views/Breadcrumb/faculties';
 import Faculty from '../components/front/faculty/faculty.vue';
 import Dote from '../components/front/doteShape.vue';
 
@@ -19,7 +18,7 @@ export default {
         return {
             link: [
                 {
-                    img: '/storage/img/faculties.jpg'
+                    img: '/images/common/faculties.jpg'
                 }
             ]
         }

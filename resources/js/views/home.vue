@@ -11,7 +11,8 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-8">
-            <h1 class="title">Events</h1>
+            <h1 class="title" v-if="$store.getters.getLanguage == 'eng'">Events</h1>
+            <h1 class="title" v-else>الأحداث</h1>
             <div class="card-deck">
 
 

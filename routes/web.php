@@ -57,6 +57,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('welcomemessage', 'WelcomeMessageController');
     Route::resource('faculty', 'HomeFacultyController');
     Route::resource('faculty_tabs', 'FacultyTabsController');
+    Route::resource('department', 'FacultyDeptController');
+    Route::resource('staff', 'DeptStaffController');
+    Route::delete('staff_mass_destroy', 'DeptStaffController@massDestroy')->name('staff.mass_destroy');
+    Route::post('/dept/update', 'FacultyDeptController@updatedept');
     Route::resource('events', 'HomeEventsController');
     Route::get('/event/images/{id}', 'HomeEventsController@getImages');
     Route::post('/event/images/delete/{image_name}', 'HomeEventsController@deleteEventImage');

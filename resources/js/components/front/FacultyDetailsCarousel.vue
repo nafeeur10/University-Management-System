@@ -14,9 +14,7 @@
     >
       <!-- Home slider -->
       <b-carousel-slide
-        v-for="(l,i) in images" :key="i"
-        :img-src="'/images/faculty/banner/' + l.faculty_banner_image"
-        img-height
+        v-for="(l,i) in images" :key="i" :img-src="'/images/faculty/banner/' + l.faculty_banner_image" img-height
       >
           <template >
               <div v-if="text == 'none'" class="home" >

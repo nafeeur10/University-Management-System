@@ -21,6 +21,9 @@ Route::get('/getallfaculty', 'HomeFacultyController@getAllFaculty')->name('facul
 Route::get('/get-faculty-details/{link}', 'HomeFacultyController@getFacultyDetails');
 Route::get('/get-faculty-tab/{faculty}', 'FacultyTabsController@getTabInfo');
 Route::get('/getcampuslife', 'CampusLifeController@getCampusLife');
+Route::get('/getalldepts/{id}', 'FacultyDeptController@getAllDept');
+Route::get('/getdeptDetails/{id}', 'FacultyDeptController@getDeptDetails');
+Route::get('/getallstaff/{id}', 'DeptStaffController@getAllStaff');
 // Event
 Route::get('events', 'HomeEventAPIController@index');
 Route::get('event/image/{id}', 'HomeEventAPIController@getEventImage');

@@ -159,10 +159,10 @@
         var formData = new FormData(this);
        
         var facultyTabDescription = document.querySelector('input[name=faculty_tab_description]');
-        facultyTabDescription.value = JSON.stringify(facultyTabDes.getContents());
+        facultyTabDescription.value = facultyTabDes.root.innerHTML;
 
         var ftda = document.querySelector('input[name=faculty_tab_description_arabic]');
-        ftda.value = JSON.stringify(facultyTabDesArab.getContents());
+        ftda.value = facultyTabDesArab.root.innerHTML;
 
 
         formData.append('faculty_tab_description_append', facultyTabDescription.value);

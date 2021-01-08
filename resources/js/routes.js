@@ -29,6 +29,7 @@ import OralLogin from './views/OralLogin.vue';
 import PharmacyLogin from './views/PharmacyLogin.vue';
 import Organizations from './views/Organizations.vue';
 import Business from './views/Business-dep.vue';
+import Department from './components/front/Departments/Index'
 import Accounting from './views/Accounting-dep.vue';
 import Economics from './views/Economics-dep.vue';
 import political from './views/political-dep.vue';
@@ -395,6 +396,18 @@ export const routes = [
             title: "Bachelor of Business Administration",
             breadCrumb: "Bachelor of Business Administration"
         }
+    },
+    {
+        path: '/department/:id',
+        name: "DepartmenBasic",
+        menu: true,
+        component: Department,
+        titulo: 'Department',
+        props: true,
+        meta: {
+            title: "Department",
+            breadCrumb: "Department"
+        },
     },
     {
         path: "/Bachelor-of-Accounting",

@@ -5,18 +5,18 @@
         {!! \Session::get('success') !!}
     </div>
 @endif
-@can('editor_add_update')
+@if(Auth::user()->can('users_manage') && Auth::user()->can('editor_add_update'))
     <div style="margin-bottom: 10px;" class="row">
         <div class="d-flex py-2">
             <a class="btn btn-success mx-2" href="{{ route("admin.faculty.create") }}">
                 {{ trans('global.add') }} {{ trans('cruds.faculty.title') }}
             </a>
-            <a class="btn btn-primary" href="{{ route('admin.faculty_tabs.create') }}">
+            <a class="btn btn-primary mr-2" href="{{ route('admin.faculty_tabs.create') }}">
                 {{ trans('global.add') }} {{ trans('cruds.faculty.tabs.title') }}
             </a>
         </div>
     </div>
-@endcan
+@endif
 
 <div class="card">
     <div class="card-header">
@@ -28,13 +28,6 @@
             <table class=" table table-bordered table-striped table-hover datatable datatable-Home-Faculty">
                 <thead>
                     <tr>
-                        <th width="10">
-
-                        </th>
-
-                        <th>
-                            {{ trans('cruds.faculty.fields.id') }}
-                        </th>
 
                         <th>
                             {{ trans('cruds.faculty.fields.home_faculty_image') }}
@@ -65,8 +58,7 @@
                 <tbody>
                     @foreach($faculties as $key => $faculty)
                         <tr data-entry-id="{{ $faculty->id }}">
-                            <td></td>
-                            <td>{{ $faculty->id }}</td>
+                            
                             <td><img src="{{ asset('images/faculty/'.$faculty->home_faculty_image) }}" style="width: 100px;"/></td>                            
                             <td>{{ $faculty->home_faculty_title }}</td>
                             <td>{{ $faculty->home_faculty_title_arabic }}</td>
@@ -76,13 +68,13 @@
                             <td>
                                 <a href="{{ route('admin.faculty.show', $faculty->id) }}" class="btn btn-sm btn-primary">View</a>
                                 <a href="{{ route('admin.faculty.edit', $faculty->id) }}" class="btn btn-sm btn-info">Edit</a>
-                                @can('user_manage')
+                                @if(Auth::user()->can('users_manage') && Auth::user()->can('editor_add_update'))
                                 <form action="{{ route('admin.faculty.destroy', $faculty->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="submit" class="btn btn-sm btn-danger" value="{{ trans('global.delete') }}">
                                 </form>
-                                @endcan
+                                @endif
                             </td>
                         </tr>
                     @endforeach

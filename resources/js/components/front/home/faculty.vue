@@ -33,16 +33,18 @@
                             <template v-slot:img>
                                 <div class="card-deck">
 
-                                    <div v-for="(f , i) in facultyInfo " :key="i" class="card">
-                                        <img :src="'images/faculty/'+f.home_faculty_image" class="card-img-top" alt="..." />
-                                        <div class="card-body">
-                                            <router-link class="card-title" :to="{ name: 'FacultyDetails', params: { link: f.home_faculty_link } }">
-                                                <h5 v-if="$store.getters.getLanguage == 'eng'"> {{ f.home_faculty_title }} </h5>
-                                                <h5 v-else> {{ f.home_faculty_title_arabic }} </h5>
-                                            </router-link>
-                                            <p class="card-text text-muted" v-if="$store.getters.getLanguage == 'eng'"> {{ f.home_faculty_description }} </p>
-                                            <p class="card-text text-muted text-right" dir="rtl" v-else> {{ f.home_faculty_description_arabic }} </p>
-                                        </div>
+                                    <div v-for="(f , i) in facultyInfo.slice(0, 4)" :key="i" class="card">
+                                        <router-link class="card-title" :to="{ name: 'FacultyDetails', params: { link: f.home_faculty_link } }">
+                                            <img :src="'images/faculty/'+f.home_faculty_image" class="card-img-top" alt="..." />
+                                            <div class="card-body">
+                                                
+                                                    <h5 v-if="$store.getters.getLanguage == 'eng'"> {{ f.home_faculty_title }} </h5>
+                                                    <h5 v-else> {{ f.home_faculty_title_arabic }} </h5>
+                                                
+                                                <p class="card-text text-muted" v-if="$store.getters.getLanguage == 'eng'"> {{ f.home_faculty_description }} </p>
+                                                <p class="card-text text-muted text-right" dir="rtl" v-else> {{ f.home_faculty_description_arabic }} </p>
+                                            </div>
+                                        </router-link>
                                     </div>
 
                                 </div>

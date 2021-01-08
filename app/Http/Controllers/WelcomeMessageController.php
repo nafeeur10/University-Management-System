@@ -49,6 +49,7 @@ class WelcomeMessageController extends Controller
         $welcomemessage = WelcomeMessage::findOrFail(1);
 
         if($files = $request->file('welcome_signature')) {
+            if(file_exists(public_path('images/signature/'.$welcomemessage->welcome_signature)))
             unlink(public_path('images/signature/'.$welcomemessage->welcome_signature));
             $signatureImageName = 'Signature'.time().'.'.$files->getClientOriginalExtension();
             $files->move(public_path('images/signature'), $signatureImageName);

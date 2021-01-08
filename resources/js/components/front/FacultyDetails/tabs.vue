@@ -2,7 +2,7 @@
   <div class>
     <div class="row">
       <div class="col-lg-3 no-padding">
-        <img :src="'/images/faculty/tab/' + imgUrl" class="img-fluid" alt="Responsive image" />
+        <img :src="'/images/faculty/tab/' + url" class="img-fluid" alt="Responsive image" />
       </div>
       <div class="col-lg-3 no-padding tabs">
         <ul>
@@ -12,7 +12,6 @@
             v-for="(i, b) in facultyTabDetails"
             :key="b"
           >
-            <!-- <i :class="i.icon" v-show="i.id == tabID" aria-hidden="true"></i> -->
             <div :class="{btnitem: i.id == tabID }">
               <h6 :class="{Clicked: i.id == tabID }">{{ i.faculty_tab_title }}</h6>
             </div>
@@ -22,7 +21,7 @@
       <div class="col-lg-6 no-padding">
         <div v-for="tab in facultyTabDetails" :key="tab.id">
           <div class="cont" v-if="tabID == tab.id">
-            {{ tab.faculty_tab_description }}
+            <div v-html="tab.faculty_tab_description"></div>
           </div>
         </div>
       </div>
@@ -73,6 +72,9 @@ export default {
   },
   mounted() {
     this.firstUrlForImage();
+  },
+  created() {
+    this.tabClicl(this.facultyTabDetails[0]);
   }
 };
 </script>
