@@ -24,6 +24,11 @@ Route::get('/getcampuslife', 'CampusLifeController@getCampusLife');
 Route::get('/getalldepts/{id}', 'FacultyDeptController@getAllDept');
 Route::get('/getdeptDetails/{id}', 'FacultyDeptController@getDeptDetails');
 Route::get('/getallstaff/{id}', 'DeptStaffController@getAllStaff');
+Route::get('/allMultimedia', 'MultiMediaController@getMultimedia');
+Route::get('/get/home/research', 'ResearchBasicController@getHomePageResearch');
+Route::get('/get/research/link', 'ResearchLinkController@getResearchLink');
+Route::get('/get/research/pdf', 'ResearchLinkController@getResearchPdf');
+Route::get('/get/research/individual', 'ResearchIndividualController@getResearchIndividual');
 // Event
 Route::get('events', 'HomeEventAPIController@index');
 Route::get('event/image/{id}', 'HomeEventAPIController@getEventImage');

@@ -57,24 +57,34 @@
                 <span class="menu-title" data-i18n="Email">{{ trans('cruds.homepagecontent.welcomemessage.title_singular') }}</span>
             </a>
         </li>
-        <li class="nav-item {{ request()->is('admin/faculty') || request()->is('admin/faculty/*') ? 'active' : '' }}">
-            <a href="{{ route("admin.faculty.index") }}">
-                <i class="feather icon-mail"></i>
-                <span class="menu-title" data-i18n="Email">{{ trans('cruds.faculty.title') }}</span>
+
+        <li class="nav-item {{ request()->is('admin/faculty') || request()->is('admin/faculty/*') || request()->is('admin/department') || request()->is('admin/department/*') || request()->is('admin/staff') || request()->is('admin/staff/*') ? 'active' : '' }}">
+            <a href="javascript::void(0)">
+                <i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="{{ trans('cruds.faculty.title') }}">{{ trans('cruds.faculty.title') }}</span>
             </a>
+            <ul class="menu-content">
+                <li>
+                    <a href="{{ route("admin.faculty.index") }}">
+                        <i class="feather icon-circle"></i>
+                        <span class="menu-item" data-i18n="{{ trans('cruds.faculty.title') }}">{{ trans('cruds.faculty.title') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route("admin.department.index") }}">
+                        <i class="feather icon-circle"></i>
+                        <span class="menu-item" data-i18n="{{ trans('cruds.faculty.dept.title') }}">{{ trans('cruds.faculty.dept.title') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.staff.index') }}">
+                        <i class="feather icon-circle"></i>
+                        <span class="menu-item" data-i18n="{{ trans('cruds.staff.title') }}">{{ trans('cruds.staff.title') }}</span>
+                    </a>
+                </li>
+            </ul>
         </li>
-        <li class="nav-item {{ request()->is('admin/department') || request()->is('admin/department/*') ? 'active' : '' }}">
-            <a href="{{ route("admin.department.index") }}">
-                <i class="feather icon-mail"></i>
-                <span class="menu-title" data-i18n="Email">{{ trans('cruds.faculty.dept.title') }}</span>
-            </a>
-        </li>
-        <li class="nav-item {{ request()->is('admin/staff') || request()->is('admin/staff/*') ? 'active' : '' }}">
-            <a href="{{ route("admin.staff.index") }}">
-                <i class="feather icon-mail"></i>
-                <span class="menu-title" data-i18n="Email">{{ trans('cruds.staff.title') }}</span>
-            </a>
-        </li>
+
+
         <li class="nav-item {{ request()->is('admin/events') || request()->is('admin/events/*') ? 'active' : '' }}">
             <a href="{{ route("admin.events.index") }}">
                 <i class="feather icon-mail"></i>
@@ -98,6 +108,43 @@
                 <i class="feather icon-mail"></i>
                 <span class="menu-title" data-i18n="Email">{{ trans('cruds.campuslife.title') }}</span>
             </a>
+        </li>
+        <li class="nav-item {{ request()->is('admin/multimedia') || request()->is('admin/multimedia/*') ? 'active' : '' }}">
+            <a href="{{ route("admin.multimedia.index") }}">
+                <i class="feather icon-mail"></i>
+                <span class="menu-title" data-i18n="Email">{{ trans('cruds.multimedia.title') }}</span>
+            </a>
+        </li>
+        <li class="nav-item {{ request()->is('admin/newsletter') || request()->is('admin/newsletter/*') ? 'active' : '' }}">
+            <a href="{{ route("newsletter.index") }}">
+                <i class="feather icon-mail"></i>
+                <span class="menu-title" data-i18n="Email">{{ trans('cruds.newsletter.title') }}</span>
+            </a>
+        </li>
+        <li class="nav-item {{ request()->is('admin/research') || request()->is('admin/research/*') || request()->is('admin/research') || request()->is('admin/research/*') || request()->is('admin/research') || request()->is('admin/research/*') ? 'active' : '' }}"">
+            <a href="javascript::void(0)">
+                <i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="{{ trans('cruds.research.title') }}">{{ trans('cruds.research.title') }}</span>
+            </a>
+            <ul class="menu-content">
+                <li>
+                    <a href="{{ route('admin.research.index') }}">
+                        <i class="feather icon-circle"></i>
+                        <span class="menu-item" data-i18n="{{ trans('cruds.research.homepage_research') }}">{{ trans('cruds.research.homepage_research') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.research-link.index') }}">
+                        <i class="feather icon-circle"></i>
+                        <span class="menu-item" data-i18n="{{ trans('cruds.research.link.title') }}">{{ trans('cruds.research.link.title') }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.research-individual.index') }}">
+                        <i class="feather icon-circle"></i>
+                        <span class="menu-item" data-i18n="{{ trans('cruds.research.individual.title') }}">{{ trans('cruds.research.individual.title') }}</span>
+                    </a>
+                </li>
+            </ul>
         </li>
         @endcan
 

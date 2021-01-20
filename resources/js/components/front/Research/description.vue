@@ -3,18 +3,36 @@
   <b-row class="justify-content-md-center">
     <b-col col lg="8">
         <div class="right_holder">
-            <h1 class="title">
-                Scientific Research
+            <h1 class="title" v-if="$store.getters.getLanguage == 'eng'">
+                {{ researchInfo.research_title }}
+            </h1>
+            <h1 class="title" v-else>
+                {{ researchInfo.research_title_arabic }}
             </h1>
             <div class="desc">
-                Based on the importance of scientific research at the university, and in line with the strategic objectives of our beloved country, Plan 2030, the Egyptian Russian University supports the research process within the various faculties of the university, in various research fields. On the university’s page on the Scopus database until the month of 8-2020, we will find about 270 papers published in 21 different fields emanating from the university’s colleges. <br>
-                <img src="/storage/img/PieChart.jpg" class="img-fluid" style="margin-top:64px" />
-                <a 
+                <span v-if="$store.getters.getLanguage == 'eng'" v-html="researchInfo.research_description"></span>
+                <span v-else  v-html="researchInfo.research_description_arabic"></span>
+                <br>
+                <img :src="'images/research/'+ researchInfo.research_details_main_image" class="img-fluid" style="margin-top:64px" />
+                <a
+                  v-for="link in researchLink"
+                  :key="link.id"
                   class="btn life"
-                  href="https://08105btjv-1105-y-https-www-scopus-com.mplbci.ekb.eg/affil/profile.uri?afid=60110581&offset=1&sid=d718b6c62af99c952f4826492cb83482&origin=AffiliationNamesList&txGid=b3748b80a58f1b58a4c36cc5c3482877"
-                  target="_blank">Various examples of scientific research published in the years 2019-2020</a>
+                  :href="link.research_link_url"
+                  target="_blank">
+                  <span v-if="$store.getters.getLanguage == 'eng'">{{ link.research_title }}</span>
+                  <span v-else>{{ link.research_title_arabic }}</span>
+                </a>
             </div>
-            <button class="btn us" type="submit" onclick="window.open('storage/img/All-publications.pdf')">All publications</button>
+            <button 
+                class="btn us" 
+                type="submit" 
+                v-for="pdf in researchPdf"
+                :key="pdf.id"
+                @click.prevent="openFile(pdf.research_link_upload)">
+                <span v-if="$store.getters.getLanguage == 'eng' ">{{ pdf.research_title }}</span>
+                <span v-else>{{ pdf.research_title_arabic }}</span>
+            </button>
         </div>
     </b-col>
   </b-row>
@@ -22,7 +40,51 @@
 </b-container>
 </template>
 
-
+<script>
+export default {
+    data() {
+        return {
+            researchInfo: null,
+            researchLink: null,
+            researchPdf: null
+        }
+    },
+    methods: {
+        getResearch() {
+            this.$http.get('api/get/home/research')
+            .then( (res) => {
+                this.researchInfo = res.data.research_homepage
+            }).catch( (err) => {
+                alert("Something wrong with Research Information. Please Check.");
+            })
+        },
+        getLink() {
+            this.$http.get('api/get/research/link')
+            .then( (res) => {
+                this.researchLink = res.data.research_links
+            }).catch( (err) => {
+                alert("Something wrong with Research Information. Please Check.");
+            })
+        },
+        getPDF() {
+            this.$http.get('api/get/research/pdf')
+            .then( (res) => {
+                this.researchPdf = res.data.research_pdfs
+            }).catch( (err) => {
+                alert("Something wrong with Research Information. Please Check.");
+            })
+        },
+        openFile(file) {
+             window.open("file/research/" + file, "_blank");
+        }
+    },
+    mounted() {
+        this.getResearch();
+        this.getLink();
+        this.getPDF();
+    }
+}
+</script>
 
 <style scoped lang="sass">
 

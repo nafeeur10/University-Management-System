@@ -1,11 +1,11 @@
 <template>
   <div>
-    <carousel :link="link" text="Scientific Research" />
+    <carousel :link="link" :text="researchInfo.research_title" v-if="$store.getters.getLanguage == 'eng'"/>
+    <carousel :link="link" :text="researchInfo.research_title_arabic" v-else/>
     <breadcrumb />
     <description />
     <dote style="margin-top: 50px;" />
     <steps />
-    <dote style="margin-top: 50px;" />
   </div>
 </template>
 
@@ -13,7 +13,7 @@
 <script>
 
 import Breadcrumb from '../components/front/breadcrumb.vue';
-import Carousel from '../components/front/carousel.vue';
+import Carousel from '../components/front/NewsCarousel';
 import Description from '../components/front/Research/description.vue';
 import Dote from '../components/front/doteShape.vue';
 import steps from '../components/front/Research/steps.vue';
@@ -24,9 +24,10 @@ export default {
         return {
             link: [
                 {
-                    img: '/storage/img/quality.jpeg'
+                    img: '/images/common/quality.jpeg'
                 }
-            ]
+            ],
+            researchInfo: null
         }
     },
   components: {
@@ -35,6 +36,21 @@ export default {
     description: Description,
     steps: steps,
     dote: Dote,
+  },
+
+  methods: {
+    getResearch() {
+      this.$http.get('api/get/home/research')
+      .then( (res) => {
+          this.researchInfo = res.data.research_homepage
+          console.log(this.researchInfo);
+      }).catch( (err) => {
+          alert("Something wrong with Research Information. Please Check.");
+      })
+    }
+  },
+  created() {
+    this.getResearch();
   }
 };
 </script>

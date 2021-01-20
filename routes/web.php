@@ -59,8 +59,14 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::resource('faculty_tabs', 'FacultyTabsController');
     Route::resource('department', 'FacultyDeptController');
     Route::resource('staff', 'DeptStaffController');
+    Route::resource('multimedia', 'MultimediaController');
+    Route::resource('research', 'ResearchBasicController');
+    Route::resource('research-link', 'ResearchLinkController');
+    Route::resource('research-individual', 'ResearchIndividualController');
+    Route::post('research-individual/updateri', 'ResearchIndividualController@updateri')->name('research-individual.update-ri');
     Route::delete('staff_mass_destroy', 'DeptStaffController@massDestroy')->name('staff.mass_destroy');
     Route::post('/dept/update', 'FacultyDeptController@updatedept');
+    Route::post('/research/update', 'ResearchBasicController@updateresearch')->name('update-research');
     Route::resource('events', 'HomeEventsController');
     Route::get('/event/images/{id}', 'HomeEventsController@getImages');
     Route::post('/event/images/delete/{image_name}', 'HomeEventsController@deleteEventImage');
@@ -87,5 +93,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     Route::delete('contactform_issue_destroy/{id}', 'ContactFormController@issue_destroy')->name('contactform_issue.destroy');
 
     Route::get('visitors', 'VisitorsController@index')->name('visitors.index');
+    
 
 });
+
+
+Route::resource('newsletter', 'NewsletterController');

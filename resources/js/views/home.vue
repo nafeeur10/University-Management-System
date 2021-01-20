@@ -119,7 +119,7 @@
 
               <transition-group name="fade" tag="div" mode="out-in">
                 <a :href="partner.partner_link"
-                    v-for="(partner, index) in ourPartnerImages" 
+                    v-for="(partner, index) in ourPartnerImages.slice(0, 6)" 
                     :key="partner.id"
                     target="_blank"
                     class="d-block"
@@ -244,13 +244,9 @@
                 </h3>
               </div>
               <div class="row">
-                <div class="col-sm-6 photo1" style="padding-left: 0;padding-right: 0;">
-                  <img src="/storage/img/g1.jpeg" class="img-fluid" alt="..." />
+                <div class="col-md-6 photo1" style="padding-left: 0;padding-right: 0;" v-for="img in multimediaImages.slice(0, 2)" :key="img.href">
+                  <img :src="img.href" class="img-fluid w-100" alt="..." />
                 </div>
-
-                 <div class="col-sm-6 photo1" style="padding-left: 0;padding-right: 0;">
-                      <img src="/storage/img/g6.jpg " class="img-fluid" alt="..." />
-                  </div>
               </div>
             </div>
             <!-- {{-- MULTIMEDIA --}} -->
@@ -258,30 +254,43 @@
             <div class="ERU’S">
               <div class="header">
                 <h3>
-                  <strong>ERU’S RESEARCH</strong>
-                  <small>
+                  <strong v-if="$store.getters.getLanguage == 'eng'" class="mt-1">ERU’S RESEARCH</strong>
+                  <strong class="mt-1" v-else>أبحاث ERU</strong>
+                  <small class="mt-2">
                   <router-link
-                          to="/Research"
-                          class="more"
-                          style="display: block;"
-                          exact
-                          title="Research">
+                    to="/Research"
+                    class="more"
+                    style="display: block;"
+                    exact
+                    title="Research"
+                    v-if="$store.getters.getLanguage == 'eng'"
+                  >
                     VIEW ALL RESEARCH
+                  </router-link>
+                  <router-link
+                    to="/Research"
+                    class="more"
+                    style="display: block;"
+                    exact
+                    title="Research"
+                    v-else
+                  >
+                    عرض كل الأبحاث
                   </router-link>
                   </small>
                 </h3>
               </div>
               <div class="row ERU’S">
                 <div class="col-sm-6 photo1" style="padding-left: 0;padding-right: 0;">
-                  <img src="/storage/img/last.jpeg " style="height: 24em;" class="card-img-top" alt="..." />
+                  <img :src="'images/research/'+researchInfo.research_homepage_image" style="height: 24em;" class="card-img-top" alt="..." />
                 </div>
                 <div class="col-sm-6 desc1" style="padding-left: 0;padding-right: 0;">
-                  <div class="desc">
-                    <h2 class="title">RESEARCH</h2>
-                    <p class="cont">
-                      Based on the importance of scientific research at the university, and in line with the strategic objectives of our beloved country, Plan 2030, the Egyptian Russian University supports the research process within the various faculties of the university, in various research fields. On the university’s page on the Scopus database until the month of 8-2020, we will find about 270 papers published in 21 different fields emanating from the university’s colleges.
-                    </p>
+                  <div class="desc research-desc">
+                    <h2 class="title" v-if="$store.getters.getLanguage == 'eng'">{{ researchInfo.research_title }}</h2>
+                    <h2 class="title text-right" v-else>{{ researchInfo.research_title_arabic }}</h2>
                     
+                    <p v-if="$store.getters.getLanguage == 'eng'" class="cont white" v-html="researchInfo.research_description"></p>
+                    <p v-else class="cont white text-right" v-html="researchInfo.research_description_arabic"></p>
                   </div>
                 </div>
               </div>
@@ -317,7 +326,8 @@ export default {
 
       tickerLocation: 0,
       partnersInitialValue: [],
-      campusLife: []
+      campusLife: [],
+      researchInfo: null
     }
   },
   filters: {
@@ -506,6 +516,23 @@ export default {
       .then( (res) => {
         this.campusLife = res.data.campuslife
       })
+    },
+    getMultimedia() {
+      this.$http.get('api/allMultimedia')
+      .then( (res) => {
+          this.multimediaImages = res.data.allMultimedia
+      }).catch( (err) => {
+          alert("Something wrong with Multimedia Image. Please Check.");
+      })
+    },
+    getResearchHomepage() {
+      this.$http.get('api/get/home/research')
+      .then( (res) => {
+          this.researchInfo = res.data.research_homepage
+          console.log(this.researchInfo);
+      }).catch( (err) => {
+          alert("Something wrong with Research Information. Please Check.");
+      })
     }
   },
   components: {
@@ -522,10 +549,17 @@ export default {
   },
   created() {
     this.getLatestNews();
+    this.getMultimedia();
+    this.getResearchHomepage();
   }
 };
 </script>
 
+<style>
+.research-desc p {
+  color: white!important;
+} 
+</style>
 <style scoped>
   .more
   {
@@ -537,7 +571,7 @@ export default {
     color: #c20000;
   }
   .desc p{
-    color: white !important;
+    color: rgb(255, 255, 255) !important;
   }
   .white 
   {
@@ -548,5 +582,9 @@ export default {
   {
     color:#ccc;
 
+  }
+
+  .white p {
+    color: white!important;
   }
 </style>

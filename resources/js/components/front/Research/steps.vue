@@ -1,29 +1,58 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="row" v-for="research in researchIndividual" :key="research.id">
       <div class="col-lg-6 col-sm-12">
         <div class="right_holder">
-          <h1 class="title">Dr. Hany Said Ibrahim</h1>
-          <div
-            class="desc"
-          >
-            Dr. Hani Said Ibrahim, lecturer of Pharmaceutical Chemistry, Faculty of Pharmacy, Egyptian Russian University, has received Alexander von Humboldt Foundation Scholarship for the year 2020.
-            This scholarship will include the support for the researcher to obtain four-month language course and also travel for two years at Martin-Luther Universität-Halle Wittenberg under the supervision of Prof. Dr. Wolfgang Sippl to conduct research experiments in the field of discovering anti-cancer drugs using the recent technologies in this field.<br><br>
-            <strong>About the researcher:</strong><br>
-            Dr. Ibrahim obtained MSc degree in pharmaceutical chemistry from the Faculty of Pharmacy, Suez Canal University in 2013, and PhD from the Faculty of Pharmacy, Cairo University in 2016 in the same specialty under supervision of Prof. Dr. Sahar Abou-Seri and Prof. Dr. Hatem Abdel-Aziz.  He showed enormous research activities in this field as he published, till now, 24 research papers in the field of pharmaceutical chemistry, most of them in high ranked journals. His papers have been scientifically cited more than 500 times showing h-index 15. He also participated in supervising master's and doctoral theses in this field and contributed to awarding masters and doctoral degrees to researchers from the Egyptian Russian University with the participation of Faculty of Pharmacy, Cairo University, under the supervision of Prof. Dr. Sahar Abou-Seri. He is a well-known reviewer of numerous international journals in the field of organic and pharmaceutical chemistry. The researcher also received funding for a short-term grant (GERSS) for six months funded by the German Academic Exchange DAAD in 2019. He participated in many international conferences such as the European Workshop of Drug Design in 2017 and he won the best scientific presentation award at the Cairo Science Forum in 2019. This conference is sponsored by Alexander von Humboldt Foundation and many famous international scientific foundations.
-
-          </div>
+          <h1 class="title" v-if="$store.getters.getLanguage == 'eng'">{{ research.research_individual_title }}</h1>
+          <h1 class="title" v-else>{{ research.research_individual_title_arabic }}</h1>
+          <div class="desc" v-if="$store.getters.getLanguage == 'eng'" v-html="research.research_individual_description"></div>
+          <div class="desc" v-else v-html="research.research_individual_description_arabic"></div>
         </div>
       </div>
       <div class="col-lg-6 col-sm-12">
         <div class="back">
-            <img src="/storage/img/dr-ibrahim.jpg" class="img-fluid" style="margin-top:64px" />
+            <img :src="'images/research/individual/' + research.research_individual_image" class="img-fluid" style="margin-top:64px" />
         </div>
       </div>
+      <dote style="margin-top: 50px;" class="widthOfImage" />
     </div>
   </div>
 </template>
 
+<script>
+
+import Dote from '../../front/doteShape';
+
+export default {
+    data() {
+        return {
+            researchIndividual: null,
+        }
+    },
+    components: {
+      Dote
+    },
+    methods: {
+        getResearch() {
+            this.$http.get('api/get/research/individual')
+            .then( (res) => {
+                this.researchIndividual = res.data.research_individual
+            }).catch( (err) => {
+                alert("Something wrong with Research Information. Please Check.");
+            })
+        }
+    },
+    mounted() {
+        this.getResearch();
+    }
+}
+</script>
+
+<style>
+.widthOfImage img {
+  width: 100%!important;
+}
+</style>
 <style scoped lang="sass">
 .right_holder
     padding: 30px

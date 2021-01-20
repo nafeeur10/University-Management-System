@@ -39,6 +39,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/dark-layout.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/semi-dark-layout.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/summernote-bs4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css">
 
     <!-- Dropzone CSS -->
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -322,6 +323,7 @@
     <script src="{{ asset('app-assets/vendors/js/extensions/toastr.min.js') }}"></script>
     <script src="{{ asset('app-assets/js/scripts/extensions/toastr.js') }}"></script>
     <script src="{{ asset('app-assets/js/scripts/datatables/datatable.js ') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
     <!-- <script src="{{ asset('app-assets/js/dropzone/dropzone.js ') }}"></script>
     <script src="{{ asset('app-assets/js/scripts/extensions/sliderdropzone.js ') }}"></script> -->
     <!-- <script src="{{ asset('app-assets/js/scripts/pages/dashboard-analytics.js') }}"></script> -->

@@ -96,7 +96,7 @@
       <div class="container">
         <div class="nav_logo">
           <router-link to="/" exact title="ERU - Egyptian Russian University">
-            <img src="/storage/logo/ERU-logo.jpg " alt="ERU" />
+            <img src="/images/logo/ERU-logo.jpg " alt="ERU" />
           </router-link>
         </div>
         <div class="" id="navbarSupportedContent">

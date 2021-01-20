@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <img src="/images/common/dot-shape.png" class="img-fluid" alt="Responsive image" />
+    <img src="/images/common/dot-shape.png" class="img-fluid w-100" alt="Responsive image" />
   </div>
 </template>
 

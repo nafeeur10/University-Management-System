@@ -3,7 +3,7 @@
     <carousel :link="link" text="Multimedia" />
     <breadcrumb />
     <mida  />
-    <Accounting />
+    <!-- <Accounting /> -->
     <dote style="margin-top: 50px;" />
   </div>
 </template>
@@ -11,7 +11,7 @@
 
 <script>
 import Breadcrumb from '../components/front/breadcrumb.vue';
-import Carousel from '../components/front/carousel.vue';
+import Carousel from '../components/front/NewsCarousel';
 import DoteShape from '../components/front/doteShape.vue';
 import Mida from '../components/front/mida/mida.vue';
 
@@ -20,7 +20,7 @@ export default {
         return {
             link: [
                 {
-                    img: '/storage/img/quality.jpeg',
+                    img: '/images/img/quality.jpeg',
                 }
             ],
         }

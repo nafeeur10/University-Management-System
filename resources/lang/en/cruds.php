@@ -288,6 +288,69 @@ return [
             'staff_resume' => 'Staff Resume'
         ]
     ],
+    'multimedia' => [
+        'title' => 'Multimedia',
+        'upload_image' => 'Upload Image',
+        'image' => 'Multimedia Image'
+    ],
+    'newsletter' => [
+        'title' => 'Newsletter',
+        'email' => 'Email'
+    ],
+    'research' => [
+        'title' => 'Research',
+        'homepage_research' => 'Homepage Research',
+        'research_link' => 'Research Link',
+        'individual_research' => 'Individual Research',
+        'basic' => 'Basic',
+        'research_image_preview' => 'Research Image Preview: ',
+        'upload_research_image' => 'Upload Research Main Image: ',
+        'fields' => [
+            'main_title' => 'Main Title',
+            'main_title_helper' => '',
+            'main_title_arabic' => 'Main Title (Arabic)',
+            'main_title_arabic_helper' => '',
+            'main_description' => 'Main Description',
+            'main_description_helper' => '',
+            'main_description_arabic' => 'Main Description (Arabic)',
+            'main_description_arabic_helper' => '',
+            'home_image' => 'Home Image',
+            'home_image_preview' => 'Home Image Preview',
+            'home_image_helper' => '',
+            'details_page_image' => 'Details Page Image',
+            'details_page_image_helper' => '',
+            'upload_home_image' => 'Upload Home Image',
+            'preview_home_image' => 'Preview Home Image',
+            'upload_details_image' => 'Upload Research Details Image',
+            'preview_details_image' => 'Preview Research Details Image',
+        ],
+        'link' => [
+            'title' => 'Research Link',
+            'fields' => [
+                'research_file' => 'Research File',
+                'main_title' => 'Research Link Title',
+                'main_title_helper' => '',
+                'research_link' => 'Research Link',
+                'research_link_helper' => ''
+            ]
+        ],
+        'individual' => [
+            'title' => 'Individual Research',
+            'fields' => [
+                'title' => 'Research Title',
+                'title_helper' => '',
+                'title_arabic' => 'Research Title (Arabic)',
+                'title_arabic_helper' => '',
+                'description' => 'Research Description',
+                'description_helper' => '',
+                'description_arabic' => 'Research Description (Arabic)',
+                'description_arabic_helper' => '',
+                'image' => 'Research Image',
+                'image_helper' => '',
+                'upload_individual_image' => 'Upload Individual Image'
+            ]
+        ]
+    ],
     'event' => [
         'title' => 'Event',
         'fields' => [

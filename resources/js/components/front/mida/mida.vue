@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <Gallery :images="images" class="mida" ></Gallery>
+        <Gallery :images="images" class="mida"></Gallery>
     </div>
 </template>
 
@@ -14,105 +14,23 @@
         },
         data() {
             return {
-                images: [
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/g1.jpeg"
-                    },
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/sport2.jpg"
-                    },
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/sport3.jpg"
-                    },
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/bus1.jpg"
-                    },
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/lib1.jpg"
-                    },
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/sport1.jpg"
-                    },
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/caf1.jpg"
-                    },
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/accomodation1.jpg"
-                    },
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/sport9.jpg"
-                    },
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/accomodation2.jpg"
-                    },
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/lib3.jpg"
-                    },
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/caf3.jpg"
-                    },
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/bus3.jpg"
-                    }, 
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/campus_slider2.jpg"
-                    },
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/campus_slider1.jpg"
-                    },
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/caf6.jpg"
-                    },
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/lib2.jpg"
-                    },
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/lib4.jpg"
-                    },
-                    {
-                        title: "",
-                        description: "",
-                        href: "/storage/img/lib5.jpg"
-                    },
-                ],
+                images: [],
             };
         },
+        methods: {
+            getMultimedia() {
+                this.$http.get('api/allMultimedia')
+                .then( (res) => {
+                    this.images = res.data.allMultimedia
+                    // console.log(this.images);
+                }).catch( (err) => {
+                    alert("Something wrong with Multimedia Image. Please Check.");
+                })
+            }
+        },
+        created() {
+            this.getMultimedia();
+        }
     };
 </script>
 

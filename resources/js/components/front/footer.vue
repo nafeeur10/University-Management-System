@@ -5,7 +5,7 @@
       <div class="col-sm-4">
         <div class="r1">
           <img
-            src="/storage/logo/ERU-logo-Footer.png"
+            src="/images/logo/ERU-logo-Footer.png"
             alt="cafeteris-icon"
             title="cafeteris-icon"
             width="340"
@@ -90,22 +90,45 @@
                       title="News"
               >News</router-link>
             </li>
-            <li style="border: 1px solid;padding: 3px 12px;" >Total Uesrs {{ totalVisitors }}</li> 
+            <li style="border: 1px solid;padding: 3px 12px;">
+              <span v-if="$store.getters.getLanguage == 'eng'">Total Uesrs</span> 
+              <span v-else>إجمالي المستخدمين</span> 
+              {{ totalVisitors }}
+            </li> 
           </ul>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="r4">
-          <h4 class="title white" style="text-transform: uppercase;" >Newsletter</h4>
-          <h6 class="desc">Sign Up now and get ERU’s latest news.</h6>
-          <b-form-input  style="margin-top: 20px; background-color: #343434;border: 1px solid #5b5959;" placeholder="your email here"></b-form-input>
-          <h4 class="title white" style="margin-top: 20px" >CONNECT WITH US</h4>
+          <h4 class="title white" style="text-transform: uppercase;" v-if="$store.getters.getLanguage == 'eng'">Newsletter</h4>
+          <h4 class="title white" style="text-transform: uppercase;" v-else>النشرة الإخبارية</h4>
+          <h6 class="desc" v-if="$store.getters.getLanguage == 'eng'">Sign Up now and get ERU’s latest news.</h6>
+          <h6 class="desc" v-else>اشترك الآن واحصل على آخر أخبار ERU.</h6>
+
+          <b-form @submit="onSubmit">
+
+            <div v-if="newsletter_success">
+              <div class="alert alert-success" role="alert">
+                Thank you! You have registered successfully!
+              </div>
+            </div>
+            
+            <div class="d-flex">
+              <b-form-input 
+                class="border-right-0" 
+                style="margin-top: 20px; background-color: #343434;border: 1px solid #5b5959; border-top-right-radius: 0; border-bottom-right-radius: 0; color: white;" 
+                placeholder="your email here" 
+                v-model="newsletterEmail"
+                type="email"
+              ></b-form-input>
+              <b-button type="submit" variant="primary" class="border-left-0" style="margin-top: 20px; border-top-left-radius: 0; border-bottom-left-radius: 0;">Submit</b-button>
+            </div>
+          </b-form>
+
+          <h4 class="title white" style="margin-top: 20px" v-if="$store.getters.getLanguage == 'eng'">CONNECT WITH US</h4>
+          <h4 class="title white" style="margin-top: 20px" v-else>اتصل بنا</h4>
             <div class="icones">
-                <a href="https://www.facebook.com/eru.university" target="_blank"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
-                <a href="https://twitter.com/ERU90621078" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
-                <a href="https://www.youtube.com/channel/UCix3cUdsa5GFNDe15uuWpdA/videos" target="_blank"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
-                <a href="https://www.linkedin.com/in/eru-university-701b761b6/" target="_blank"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-                <a href="https://www.instagram.com/egyptian_russian_university_er/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a v-for="media in socialMedias" :key="media.id" :href="media.link" target="_blank" class="mr-2"><i :class="media.icon" aria-hidden="true"></i></a>
             </div>
         </div>
       </div>
@@ -126,17 +149,17 @@
 .icones
     font-size: 1.5em
     cursor: pointer
-    .fa
+    .fab
         margin-right: 3px
     .fa-facebook-square
         color: #3b5998
     .fa-twitter-square
         color: #1da1f2
-    .fa-youtube-play
+    .fa-youtube-square
         color: #c20000
-    .fa-linkedin-square
+    .fa-linkedin
         color: #0077b5
-    .fa-instagram
+    .fa-instagram-square
         color: #3F729B
 
 
@@ -146,8 +169,11 @@
 export default {
   data() {
     return {
+      newsletter_success: false,
       totalVisitors: [],
-      activeVisitors: []
+      activeVisitors: [],
+      socialMedias: [],
+      newsletterEmail: ''
     }
   },
   methods: {
@@ -157,10 +183,38 @@ export default {
         this.totalVisitors = res.data.totalVisitors
         this.activeVisitors = res.data.activeVisitors
       })
-    }
+    },
+    getSocialMedias() {
+      this.$http.get('api/contact/socialmedia')
+      .then( (res) => {
+        this.socialMedias = res.data.social_medias
+      })
+    },
+    onSubmit(event) {
+
+      event.preventDefault();
+
+      this.$http.post('newsletter', { newsletter_email: this.newsletterEmail }, 
+      { 
+        headers: {
+          'Content-Type': 'application/json', 
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') 
+        } 
+      }).then( (res) => {
+        this.newsletter_success = true;
+        setTimeout(() => {
+          this.newsletter_success = false;
+          this.newsletterEmail = ''
+        }, 3000);
+        console.log(res.data.newsletter_success)
+      }).catch( (err) => {
+        console.log(err);
+      })
+    },
   },
   mounted() {
     this.getVisitors();
+    this.getSocialMedias();
   }
 };
 </script>
